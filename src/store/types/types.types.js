@@ -1,0 +1,4 @@
+export const TYPES_ACTION_TYPES = {
+  ADD_TYPE: "ADD_TYPE",
+  REMOVE_TYPE: "REMOVE_TYPE",
+};

@@ -8,6 +8,7 @@ export const FormContainer = styled.form`
   position: relative;
   padding: 1.8rem 1.8rem;
   border-radius: 16px;
+  z-index: 1;
   input {
     padding-left: 0.8rem;
     border-radius: 6px;

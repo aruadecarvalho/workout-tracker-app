@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectWorkoutData,
   selectCanSubmit,
+  selectWorkoutNameAndType,
 } from "../../store/workout-data/workout-data.selector";
 import { canSubmitWorkout } from "../../store/workout-data/workout-data.action";
 
 const SubmitWorkout = () => {
   const workoutData = useSelector(selectWorkoutData);
+  const nameAndType = useSelector(selectWorkoutNameAndType);
   const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
 
@@ -18,11 +20,12 @@ const SubmitWorkout = () => {
     // ao enviar limpoar o formfields e limpar o workoutData e mandar o workoutData para outro reducer que vai para o firebase
     dispatch(canSubmitWorkout(true));
     try {
+      console.log(workoutData);
       const response = await addDoc(collection(db, "workouts"), {
         workoutData,
+        nameAndType,
         timeStamp: serverTimestamp(),
       });
-      dispatch(canSubmitWorkout(false));
     } catch (error) {
       console.log(error);
     }

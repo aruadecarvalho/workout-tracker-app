@@ -68,7 +68,6 @@ const WorkoutForm = () => {
     setIsSubmitted(true);
     if (isEmpty) return;
     dispatch(addData(workoutData, formFields));
-    console.log(workoutData);
     setFormFields(defaultFormFields);
     setIsSubmitted(false);
   };

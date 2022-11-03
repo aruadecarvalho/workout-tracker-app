@@ -1,78 +1,160 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectWorkoutData } from "../../store/workout-data/workout-data.selector";
-import { addNameType } from "../../store/workout-data/workout-data.action";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  selectWorkoutData,
+  selectWorkoutNameAndType,
+} from "../../store/workout-data/workout-data.selector";
+import { selectTypes } from "../../store/types/types.selector";
+import { addType } from "../../store/types/types.actions";
+import { addNameAndType } from "../../store/workout-data/workout-data.action";
+import {
+  NameTypeContainer,
   WorkoutNameInput,
   SelectTypeTitle,
   SelectTypeContainer,
   TypePreview,
   TypeContainer,
   TypeModalContainer,
+  BackdropModal,
+  TypeModalItem,
+  CreateTypeButton,
+  CreateTypeContainer,
+  AddNewTypeButton,
 } from "./name-type.form.styles";
-const defaultFormFields = {
-  workoutName: "",
-};
-
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 const NameTypeForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [workoutName, setWorkoutName] = useState("");
+  const [nameAndType, setNameAndType] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [colorPickerActive, setColorPickerActive] = useState(false);
+  const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
+  const [newType, setNewType] = useState({ name: "", color: "" });
+  const [submitNewType, setSubmitNewType] = useState(false);
   const dispatch = useDispatch();
   const workoutData = useSelector(selectWorkoutData);
+  const workoutNameAndType = useSelector(selectWorkoutNameAndType);
+  const types = useSelector(selectTypes);
 
-  const handleChange = (event) => {
-    // dispatch(addNameType(workoutData, formFields));
+  const handleNameChange = (event) => {
     const { name, value } = event.target;
-    if (name === "workoutName") {
-      setFormFields({ ...formFields, [name]: value });
-    } else {
-      setFormFields({
-        ...formFields,
-        workoutType: { ...formFields.workoutType, [name]: value },
-      });
-    }
+    setWorkoutName(value);
+    setNameAndType({ ...nameAndType, [name]: value });
   };
 
-  const typesTest = [
-    { name: "test1", color: "#123" },
-    { name: "test2", color: "#345" },
-    { name: "test3", color: "#678" },
-  ];
+  const handleSelectType = (type) => {
+    setNameAndType({ ...nameAndType, type: type });
+    setModal();
+  };
+
+  const handleNewType = (event) => {
+    const { name, value } = event.target;
+    setNewType({ ...newType, [name]: value });
+  };
+
+  const handleSubmitNewType = () => setSubmitNewType(true);
+
+  useEffect(() => {
+    if (submitNewType) {
+      dispatch(addType(newType));
+      setSubmitNewType(false);
+    }
+  }, [submitNewType]);
+
+  useEffect(() => {
+    dispatch(addNameAndType(nameAndType));
+  }, [nameAndType]);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (event.target.id === "color") {
+        setColorPickerActive(true);
+      } else {
+        setColorPickerActive(false);
+      }
+    });
+  }, []);
 
   const setModal = () => {
     setShowModal(!showModal);
   };
+  // tentar otimizar isso aqui, criando outros components
   return (
-    <div>
+    <NameTypeContainer>
       <SelectTypeContainer>
         <SelectTypeTitle>What are you up to?</SelectTypeTitle>
         <TypeContainer onClick={setModal}>
-          {typesTest.map((type, key) => {
-            return <TypePreview color={type.color} key={key} />;
-          })}
-          <TypePreview color="#000" />
-        </TypeContainer>
-        {showModal && (
-          <TypeModalContainer>
-            {typesTest.map((type, key) => {
-              return <div key={key}>{type.name}</div>;
+          {types &&
+            types.map((type, key) => {
+              return <TypePreview color={type.color} key={key} />;
             })}
-            {/* criar um preview que sempre aparece 'editar' ai ao clicar abre um menu para escolher o nome e a cor do novo tipo, cria um novo type object no workout data com um nome e uma cor e da o dispatch*/}
-            <input type="color" name="typeColor" onChange={handleChange} />
-            <button onClick={setModal}>fecha</button>
-          </TypeModalContainer>
-        )}
+          <TypePreview color="#fff">
+            <CreateTypeButton onClick={handleNewType} />
+          </TypePreview>
+        </TypeContainer>
+        <AnimatePresence>
+          {showModal && types && (
+            <motion.div
+              initial={{ opacity: 0, zIndex: 9 }}
+              animate={{ opacity: 1, zIndex: 9 }}
+              exit={{ opacity: 0, zIndex: 9 }}
+            >
+              <TypeModalContainer>
+                {types.map((type, key) => {
+                  return (
+                    <TypeModalItem
+                      key={key}
+                      onClick={() => handleSelectType(type)}
+                    >
+                      <TypePreview color={type.color} />
+                      <p>{type.name}</p>
+                    </TypeModalItem>
+                  );
+                })}
+                <TypeModalItem
+                  onClick={() => setCreateNewTypeActive(!createNewTypeActive)}
+                >
+                  <TypePreview>
+                    <CreateTypeButton onClick={handleNewType} />
+                  </TypePreview>
+                  <p>New type</p>
+                </TypeModalItem>
+                <CreateTypeContainer
+                  color={newType.color}
+                  isActive={colorPickerActive}
+                  createNewTypeActive={createNewTypeActive}
+                >
+                  <div className="color-picker">
+                    <input
+                      type="color"
+                      name="color"
+                      id="color"
+                      onChange={handleNewType}
+                    />
+                  </div>
+                  <input type="text" onChange={handleNewType} name="name" />
+                  <AddNewTypeButton
+                    buttonType={BUTTON_TYPE_CLASSES.base}
+                    onClick={handleSubmitNewType}
+                  >
+                    Create Type
+                  </AddNewTypeButton>
+                </CreateTypeContainer>
+              </TypeModalContainer>
+              <BackdropModal onClick={setModal} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </SelectTypeContainer>
-
       <WorkoutNameInput
         type="text"
-        name="workoutName"
-        value={formFields.workoutName}
-        onChange={handleChange}
+        name="name"
+        value={workoutName}
+        onChange={handleNameChange}
         placeholder="Workout name"
       />
-    </div>
+    </NameTypeContainer>
   );
 };
 

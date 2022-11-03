@@ -12,3 +12,17 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #eff1f5;
 }
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 40%;
+    display: flex;
+    display: grid;
+  }
+}
