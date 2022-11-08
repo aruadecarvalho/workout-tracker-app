@@ -80,7 +80,6 @@ const WorkoutForm = () => {
 
   return (
     <div>
-      {/* escolher o tipo */}
       <FormContainer onSubmit={handleSubmit}>
         <NameSetNumberContainer>
           <input
@@ -121,9 +120,9 @@ const WorkoutForm = () => {
                 />
               </WeightRepsInputDiv>
             ))}
+          {isEmpty && isSubmitted && <ErrorMessage>{isEmpty}</ErrorMessage>}
         </WeightRepsContainer>
         <Button type="submit">Save</Button>
-        {isEmpty && isSubmitted && <ErrorMessage>{isEmpty}</ErrorMessage>}
       </FormContainer>
     </div>
   );

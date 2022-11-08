@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 export const FormContainer = styled.form`
   width: 35rem;
-  box-shadow: 2.5px 2.5px 0px 0px rgba(0, 0, 0);
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   background-color: #fff;
-  border: 2px solid #000;
   position: relative;
   padding: 1.8rem 1.8rem;
-  border-radius: 16px;
+  border-radius: 10px;
   z-index: 1;
   input {
+    border: none;
     padding-left: 0.8rem;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 1.4rem;
-    border: 1px solid #000;
-    box-shadow: 2.5px 2.5px 0px 0px rgba(0, 0, 0);
+    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
     height: 3.2rem;
   }
   input::placeholder {

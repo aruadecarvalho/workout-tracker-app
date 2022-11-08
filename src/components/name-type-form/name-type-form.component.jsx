@@ -99,52 +99,46 @@ const NameTypeForm = () => {
             <CreateTypeButton onClick={handleNewType} />
           </TypePreview>
         </TypeContainer>
-        <AnimatePresence>
-          {showModal && types && (
-            <motion.div
-              initial={{ opacity: 0, zIndex: 9 }}
-              animate={{ opacity: 1, zIndex: 9 }}
-              exit={{ opacity: 0, zIndex: 9 }}
-            >
-              <TypeModalContainer>
-                {types.map((type, key) => {
-                  return (
-                    <TypeModalItem
-                      key={key}
-                      onClick={() => handleSelectType(type)}
-                    >
-                      <TypePreview color={type.color} />
-                      <p>{type.name}</p>
-                    </TypeModalItem>
-                  );
-                })}
-                <TypeModalItem onClick={handleCreateNewType}>
-                  <TypePreview>
-                    <CreateTypeButton onClick={handleNewType} />
-                  </TypePreview>
-                  <p>New type</p>
-                </TypeModalItem>
-                <CreateTypeContainer
-                  color={newType.color}
-                  isActive={colorPickerActive}
-                  createNewTypeActive={createNewTypeActive}
-                >
-                  <div className="color-picker">
-                    <input type="color" name="color" onChange={handleNewType} />
-                  </div>
-                  <input type="text" onChange={handleNewType} name="name" />
-                  <AddNewTypeButton
-                    buttonType={BUTTON_TYPE_CLASSES.base}
-                    onClick={handleSubmitNewType}
+        {types && (
+          <>
+            <TypeModalContainer show={showModal}>
+              {types.map((type, key) => {
+                return (
+                  <TypeModalItem
+                    key={key}
+                    onClick={() => handleSelectType(type)}
                   >
-                    Create Type
-                  </AddNewTypeButton>
-                </CreateTypeContainer>
-              </TypeModalContainer>
-              <BackdropModal onClick={setModal} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+                    <TypePreview color={type.color} />
+                    <p>{type.name}</p>
+                  </TypeModalItem>
+                );
+              })}
+              <TypeModalItem onClick={handleCreateNewType}>
+                <TypePreview>
+                  <CreateTypeButton onClick={handleNewType} />
+                </TypePreview>
+                <p>New type</p>
+              </TypeModalItem>
+              <CreateTypeContainer
+                color={newType.color}
+                isActive={colorPickerActive}
+                createNewTypeActive={createNewTypeActive}
+              >
+                <div className="color-picker">
+                  <input type="color" name="color" onChange={handleNewType} />
+                </div>
+                <input type="text" onChange={handleNewType} name="name" />
+                <AddNewTypeButton
+                  buttonType={BUTTON_TYPE_CLASSES.base}
+                  onClick={handleSubmitNewType}
+                >
+                  Create Type
+                </AddNewTypeButton>
+              </CreateTypeContainer>
+            </TypeModalContainer>
+            <BackdropModal onClick={setModal} show={showModal} />
+          </>
+        )}
       </SelectTypeContainer>
       <WorkoutNameInput
         type="text"

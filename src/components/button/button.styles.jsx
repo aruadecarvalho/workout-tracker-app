@@ -5,12 +5,11 @@ export const BaseButton = styled.button`
   font-weight: 600;
   color: #272729;
   background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 6px;
-  box-shadow: 2.5px 2.5px 0px 0px rgba(0, 0, 0);
-  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
+  padding: 0.8rem 1.6rem;
   transition: all 0.2s ease-in-out;
-
   &:hover {
     background-color: #272729;
     color: #eff1f5;
