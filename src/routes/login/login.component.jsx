@@ -20,7 +20,6 @@ const Login = () => {
         dispatch(setCurrentUser(user));
         console.log(user);
         navigate("/");
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;

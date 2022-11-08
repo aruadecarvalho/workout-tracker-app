@@ -107,7 +107,7 @@ export const CreateTypeContainer = styled.div`
   opacity: ${(props) => (props.createNewTypeActive ? "1" : "0")};
   margin-bottom: ${(props) => (props.createNewTypeActive ? "1.8rem" : "0")};
   transition: all 0.3s;
-  .color-picker {
+  div {
     background-color: ${(props) => (props.isActive ? "#fff" : props.color)};
     width: 4.4rem;
     height: 3rem;
@@ -116,6 +116,11 @@ export const CreateTypeContainer = styled.div`
     margin-left: 0.1rem;
     margin-right: 0.5rem;
     z-index: 99;
+    @media (max-width: 500px) {
+      width: 6rem;
+      height: 3.4rem;
+      margin-left: 0.16rem;
+    }
   }
   input[type="color"] {
     opacity: 0;
@@ -138,4 +143,7 @@ export const AddNewTypeButton = styled(Button)`
   transform: scale(0.7);
   bottom: -115%;
   right: -30%;
+  @media (max-width: 500px) {
+    transform: scale(0.6);
+  }
 `;

@@ -27,11 +27,14 @@ import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 const NameTypeForm = () => {
   const [workoutName, setWorkoutName] = useState("");
   const [nameAndType, setNameAndType] = useState({});
+
   const [showModal, setShowModal] = useState(false);
   const [colorPickerActive, setColorPickerActive] = useState(false);
   const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
-  const [newType, setNewType] = useState({ name: "", color: "" });
   const [submitNewType, setSubmitNewType] = useState(false);
+
+  const [newType, setNewType] = useState({ name: "", color: "" });
+
   const dispatch = useDispatch();
   const workoutData = useSelector(selectWorkoutData);
   const workoutNameAndType = useSelector(selectWorkoutNameAndType);
@@ -44,13 +47,16 @@ const NameTypeForm = () => {
   };
 
   const handleSelectType = (type) => {
-    setNameAndType({ ...nameAndType, type: type });
+    setNameAndType({ ...nameAndType, type });
     setModal();
   };
-
   const handleNewType = (event) => {
     const { name, value } = event.target;
     setNewType({ ...newType, [name]: value });
+  };
+
+  const handleCreateNewType = () => {
+    setCreateNewTypeActive(!createNewTypeActive);
   };
 
   const handleSubmitNewType = () => setSubmitNewType(true);
@@ -68,7 +74,7 @@ const NameTypeForm = () => {
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
-      if (event.target.id === "color") {
+      if (event.target.name === "color") {
         setColorPickerActive(true);
       } else {
         setColorPickerActive(false);
@@ -112,9 +118,7 @@ const NameTypeForm = () => {
                     </TypeModalItem>
                   );
                 })}
-                <TypeModalItem
-                  onClick={() => setCreateNewTypeActive(!createNewTypeActive)}
-                >
+                <TypeModalItem onClick={handleCreateNewType}>
                   <TypePreview>
                     <CreateTypeButton onClick={handleNewType} />
                   </TypePreview>
@@ -126,12 +130,7 @@ const NameTypeForm = () => {
                   createNewTypeActive={createNewTypeActive}
                 >
                   <div className="color-picker">
-                    <input
-                      type="color"
-                      name="color"
-                      id="color"
-                      onChange={handleNewType}
-                    />
+                    <input type="color" name="color" onChange={handleNewType} />
                   </div>
                   <input type="text" onChange={handleNewType} name="name" />
                   <AddNewTypeButton
