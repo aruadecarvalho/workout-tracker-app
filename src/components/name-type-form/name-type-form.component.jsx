@@ -8,6 +8,7 @@ import {
 import { selectTypes } from "../../store/types/types.selector";
 import { addType } from "../../store/types/types.actions";
 import { addNameAndType } from "../../store/workout-data/workout-data.action";
+// ! make the styles for this component more reusable
 import {
   NameTypeContainer,
   WorkoutNameInput,
@@ -68,12 +69,12 @@ const NameTypeForm = () => {
     showModal,
     setModal,
     handleSelectType,
-    handleNewType,
     handleCreateNewType,
-    handleSubmitNewType,
-    createNewTypeActive,
-    colorPickerActive,
     newType,
+    colorPickerActive,
+    createNewTypeActive,
+    handleNewType,
+    handleSubmitNewType,
   };
 
   useEffect(() => {

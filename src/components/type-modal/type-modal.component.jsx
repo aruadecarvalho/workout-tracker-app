@@ -1,16 +1,13 @@
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import {
   TypeModalContainer,
   BackdropModal,
   TypeModalItem,
-  CreateTypeContainer,
-  AddNewTypeButton,
 } from "./type-modal.styles";
-
 import {
   TypePreview,
   CreateTypeButton,
 } from "../name-type-form/name-type.form.styles";
+import CreateType from "../create-type/create-type.component";
 const TypeModal = ({
   types,
   showModal,
@@ -18,11 +15,18 @@ const TypeModal = ({
   handleSelectType,
   handleNewType,
   handleCreateNewType,
-  handleSubmitNewType,
-  createNewTypeActive,
-  colorPickerActive,
   newType,
+  colorPickerActive,
+  createNewTypeActive,
+  handleSubmitNewType,
 }) => {
+  const createTypeProps = {
+    newType,
+    colorPickerActive,
+    createNewTypeActive,
+    handleNewType,
+    handleSubmitNewType,
+  };
   return (
     <>
       <TypeModalContainer show={showModal}>
@@ -40,22 +44,7 @@ const TypeModal = ({
           </TypePreview>
           <p>New type</p>
         </TypeModalItem>
-        <CreateTypeContainer
-          color={newType.color}
-          isActive={colorPickerActive}
-          createNewTypeActive={createNewTypeActive}
-        >
-          <div className="color-picker">
-            <input type="color" name="color" onChange={handleNewType} />
-          </div>
-          <input type="text" onChange={handleNewType} name="name" />
-          <AddNewTypeButton
-            buttonType={BUTTON_TYPE_CLASSES.base}
-            onClick={handleSubmitNewType}
-          >
-            Create Type
-          </AddNewTypeButton>
-        </CreateTypeContainer>
+        <CreateType {...createTypeProps} />
       </TypeModalContainer>
       <BackdropModal onClick={setModal} show={showModal} />
     </>

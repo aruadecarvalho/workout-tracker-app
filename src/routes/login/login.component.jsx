@@ -7,7 +7,8 @@ import { setCurrentUser } from "../../store/user/user.action";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // ! add create user component
+  // !  create firebase collection for users and add each workout to the user collection
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
