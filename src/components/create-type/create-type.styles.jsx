@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../button/button.component";
+import { roundContourStyle } from "../../utils/mixins/mixins.styles";
 
 export const CreateTypeContainer = styled.div`
   display: flex;
@@ -9,12 +10,10 @@ export const CreateTypeContainer = styled.div`
   margin-bottom: ${(props) => (props.createNewTypeActive ? "2.4rem" : "0")};
   transition: all 0.3s;
   div {
+    ${roundContourStyle}
     background-color: ${(props) => (props.isActive ? "#fff" : props.color)};
     width: 4.4rem;
     height: 3rem;
-    border-radius: 50%;
-    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
-
     margin-left: 0.1rem;
     margin-right: 0.5rem;
     z-index: 99;

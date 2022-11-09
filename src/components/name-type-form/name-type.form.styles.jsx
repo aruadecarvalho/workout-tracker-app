@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { FiEdit } from "react-icons/fi";
+import {
+  roundContourStyle,
+  contourStyle,
+} from "../../utils/mixins/mixins.styles";
 
 export const NameTypeContainer = styled.div`
   margin-bottom: 2.2rem;
@@ -23,21 +27,18 @@ export const TypeContainer = styled.div`
 `;
 
 export const TypePreview = styled.div.attrs((props) => props)`
-  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
-
+  ${roundContourStyle}
   width: 25px;
   height: 25px;
-  border-radius: 50%;
   background-color: ${(props) => props.color};
   margin-right: -1rem;
   position: relative;
 `;
 
 export const WorkoutNameInput = styled.input`
+  ${contourStyle}
   padding-left: 0.8rem;
-  border-radius: 4px;
   font-size: 1.4rem;
-  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   height: 3.2rem;
   &::placeholder {
     font-weight: 600;

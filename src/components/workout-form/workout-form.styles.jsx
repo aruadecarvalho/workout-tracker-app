@@ -1,19 +1,19 @@
 import styled from "styled-components";
+import { contourStyle } from "../../utils/mixins/mixins.styles";
 
 export const FormContainer = styled.form`
   width: 35rem;
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   background-color: #fff;
   position: relative;
   padding: 1.8rem 1.8rem;
-  border-radius: 10px;
   z-index: 1;
   input {
+    ${contourStyle}
     border: none;
     padding-left: 0.8rem;
-    border-radius: 4px;
     font-size: 1.4rem;
-    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
     height: 3.2rem;
   }
   input::placeholder {
@@ -54,6 +54,7 @@ export const WeightRepsInputDiv = styled.div`
     width: 100%;
   }
 `;
+
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 1rem;
