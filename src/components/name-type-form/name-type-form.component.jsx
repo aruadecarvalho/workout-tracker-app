@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   selectWorkoutData,
   selectWorkoutNameAndType,
@@ -16,29 +15,24 @@ import {
   SelectTypeContainer,
   TypePreview,
   TypeContainer,
-  TypeModalContainer,
-  BackdropModal,
-  TypeModalItem,
   CreateTypeButton,
-  CreateTypeContainer,
-  AddNewTypeButton,
 } from "./name-type.form.styles";
-import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import TypeModal from "../type-modal/type-modal.component";
+
 const NameTypeForm = () => {
   const [workoutName, setWorkoutName] = useState("");
   const [nameAndType, setNameAndType] = useState({});
+  const [submitNewType, setSubmitNewType] = useState(false);
 
+  const types = useSelector(selectTypes);
   const [showModal, setShowModal] = useState(false);
   const [colorPickerActive, setColorPickerActive] = useState(false);
   const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
-  const [submitNewType, setSubmitNewType] = useState(false);
-
   const [newType, setNewType] = useState({ name: "", color: "" });
 
   const dispatch = useDispatch();
   const workoutData = useSelector(selectWorkoutData);
   const workoutNameAndType = useSelector(selectWorkoutNameAndType);
-  const types = useSelector(selectTypes);
 
   const handleNameChange = (event) => {
     const { name, value } = event.target;
@@ -46,13 +40,21 @@ const NameTypeForm = () => {
     setNameAndType({ ...nameAndType, [name]: value });
   };
 
+  const setModal = () => {
+    setShowModal(!showModal);
+  };
+
   const handleSelectType = (type) => {
     setNameAndType({ ...nameAndType, type });
     setModal();
   };
+
   const handleNewType = (event) => {
-    const { name, value } = event.target;
-    setNewType({ ...newType, [name]: value });
+    if (event.target.name) {
+      const { name, value } = event.target;
+      setNewType({ ...newType, [name]: value });
+    }
+    return;
   };
 
   const handleCreateNewType = () => {
@@ -60,6 +62,29 @@ const NameTypeForm = () => {
   };
 
   const handleSubmitNewType = () => setSubmitNewType(true);
+
+  const typeModalProps = {
+    types,
+    showModal,
+    setModal,
+    handleSelectType,
+    handleNewType,
+    handleCreateNewType,
+    handleSubmitNewType,
+    createNewTypeActive,
+    colorPickerActive,
+    newType,
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (event.target.name === "color") {
+        setColorPickerActive(true);
+      } else {
+        setColorPickerActive(false);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (submitNewType) {
@@ -72,20 +97,6 @@ const NameTypeForm = () => {
     dispatch(addNameAndType(nameAndType));
   }, [nameAndType]);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (event.target.name === "color") {
-        setColorPickerActive(true);
-      } else {
-        setColorPickerActive(false);
-      }
-    });
-  }, []);
-
-  const setModal = () => {
-    setShowModal(!showModal);
-  };
-  // tentar otimizar isso aqui, criando outros components
   return (
     <NameTypeContainer>
       <SelectTypeContainer>
@@ -101,42 +112,7 @@ const NameTypeForm = () => {
         </TypeContainer>
         {types && (
           <>
-            <TypeModalContainer show={showModal}>
-              {types.map((type, key) => {
-                return (
-                  <TypeModalItem
-                    key={key}
-                    onClick={() => handleSelectType(type)}
-                  >
-                    <TypePreview color={type.color} />
-                    <p>{type.name}</p>
-                  </TypeModalItem>
-                );
-              })}
-              <TypeModalItem onClick={handleCreateNewType}>
-                <TypePreview>
-                  <CreateTypeButton onClick={handleNewType} />
-                </TypePreview>
-                <p>New type</p>
-              </TypeModalItem>
-              <CreateTypeContainer
-                color={newType.color}
-                isActive={colorPickerActive}
-                createNewTypeActive={createNewTypeActive}
-              >
-                <div className="color-picker">
-                  <input type="color" name="color" onChange={handleNewType} />
-                </div>
-                <input type="text" onChange={handleNewType} name="name" />
-                <AddNewTypeButton
-                  buttonType={BUTTON_TYPE_CLASSES.base}
-                  onClick={handleSubmitNewType}
-                >
-                  Create Type
-                </AddNewTypeButton>
-              </CreateTypeContainer>
-            </TypeModalContainer>
-            <BackdropModal onClick={setModal} show={showModal} />
+            <TypeModal {...typeModalProps} />
           </>
         )}
       </SelectTypeContainer>
