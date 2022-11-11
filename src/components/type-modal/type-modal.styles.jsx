@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { hideComponent, contourStyle } from "../../utils/mixins/mixins.styles";
+import {
+  hideComponent,
+  contourStyle,
+  SlideLeftAnimation,
+} from "../../utils/mixins/mixins.styles";
 
 export const TypeModalContainer = styled.div`
   ${hideComponent}
@@ -22,6 +26,7 @@ export const TypeModalContainer = styled.div`
 `;
 
 export const TypeModalItem = styled.div`
+  ${SlideLeftAnimation}
   display: flex;
   align-items: center;
   gap: 2rem;

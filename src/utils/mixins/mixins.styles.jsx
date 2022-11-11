@@ -18,3 +18,17 @@ export const roundContourStyle = css`
   ${componentBoxShadow}
   border-radius: 50%;
 `;
+
+export const SlideLeftAnimation = css`
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-60%);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  animation: slideInFromLeft 0.3s cubic-bezier(0.48, 0.32, 0.6, 0.83);
+`;
