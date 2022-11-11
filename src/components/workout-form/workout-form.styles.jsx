@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { contourStyle } from "../../utils/mixins/mixins.styles";
+import { inputStyle } from "../../utils/mixins/mixins.styles";
 
 export const FormContainer = styled.form`
   width: 35rem;
@@ -10,19 +10,7 @@ export const FormContainer = styled.form`
   padding: 1.8rem 1.8rem;
   z-index: 1;
   input {
-    ${contourStyle}
-    border: none;
-    padding-left: 0.8rem;
-    font-size: 1.4rem;
-    height: 3.2rem;
-  }
-  input::placeholder {
-    font-weight: 600;
-    opacity: 0.35;
-    font-size: 1.4rem;
-  }
-  input:focus {
-    outline: none;
+    ${inputStyle}
   }
 `;
 

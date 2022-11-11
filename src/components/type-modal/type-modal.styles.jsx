@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {
   hideComponent,
   contourStyle,
-  SlideLeftAnimation,
+  slideInEliptic,
 } from "../../utils/mixins/mixins.styles";
 
 export const TypeModalContainer = styled.div`
@@ -26,7 +26,7 @@ export const TypeModalContainer = styled.div`
 `;
 
 export const TypeModalItem = styled.div`
-  ${SlideLeftAnimation}
+  ${slideInEliptic}
   display: flex;
   align-items: center;
   gap: 2rem;

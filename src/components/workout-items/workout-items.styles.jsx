@@ -1,12 +1,9 @@
 import styled, { css } from "styled-components";
-import {
-  contourStyle,
-  SlideLeftAnimation,
-} from "../../utils/mixins/mixins.styles";
+import { contourStyle, slideInEliptic } from "../../utils/mixins/mixins.styles";
 
 export const WorkoutItem = styled.div`
   ${contourStyle}
-  ${SlideLeftAnimation}
+  ${slideInEliptic}
   width: 45%;
   font-size: 1.4rem;
   background-color: #1e1e1e;

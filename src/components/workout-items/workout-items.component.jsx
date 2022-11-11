@@ -7,7 +7,7 @@ const WorkoutItems = () => {
     <>
       <WorkoutItemTitle>History</WorkoutItemTitle>
       {workoutData.map((item, index) => (
-        <WorkoutItem key={item.exerciseName}>
+        <WorkoutItem key={index}>
           <p>{item.exerciseName}</p>
         </WorkoutItem>
       ))}

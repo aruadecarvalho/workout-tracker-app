@@ -1,12 +1,27 @@
 import { css } from "styled-components";
 
-export const hideComponent = css`
-  opacity: ${(props) => (props.show ? "1" : "0")};
-  visibility: ${(props) => (props.show ? "visible" : "hidden")};
-`;
-
 const componentBoxShadow = css`
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
+`;
+
+export const hideComponent = css`
+  opacity: ${(props) => (props.show ? "1" : "0")};
+  display: ${(props) => (props.show ? "block" : "none")};
+  pointer-events: ${(props) => (props.show ? "all" : "none")};
+`;
+
+export const slideInEliptic = css`
+  animation: slideInEliptic 0.3s ease-in-out;
+  @keyframes slideInEliptic {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 export const contourStyle = css`
@@ -19,16 +34,18 @@ export const roundContourStyle = css`
   border-radius: 50%;
 `;
 
-export const SlideLeftAnimation = css`
-  @keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-60%);
-      opacity: 0.3;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+export const inputStyle = css`
+  ${contourStyle}
+  padding-left: 0.8rem;
+  font-size: 1.4rem;
+  height: 3.2rem;
+  border: none;
+  &::placeholder {
+    font-weight: 600;
+    opacity: 0.35;
+    font-size: 1.4rem;
   }
-  animation: slideInFromLeft 0.3s cubic-bezier(0.48, 0.32, 0.6, 0.83);
+  &:focus {
+    outline: none;
+  }
 `;

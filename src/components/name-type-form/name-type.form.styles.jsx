@@ -2,14 +2,11 @@ import styled from "styled-components";
 import { FiEdit } from "react-icons/fi";
 import {
   roundContourStyle,
-  contourStyle,
+  inputStyle,
 } from "../../utils/mixins/mixins.styles";
 
 export const NameTypeContainer = styled.div`
   margin-bottom: 2.2rem;
-  input {
-    border: none;
-  }
 `;
 
 export const SelectTypeContainer = styled.div`
@@ -36,18 +33,7 @@ export const TypePreview = styled.div.attrs((props) => props)`
 `;
 
 export const WorkoutNameInput = styled.input`
-  ${contourStyle}
-  padding-left: 0.8rem;
-  font-size: 1.4rem;
-  height: 3.2rem;
-  &::placeholder {
-    font-weight: 600;
-    opacity: 0.35;
-    font-size: 1.4rem;
-  }
-  &:focus {
-    outline: none;
-  }
+  ${inputStyle}
 `;
 
 export const SelectTypeTitle = styled.p`
