@@ -22,6 +22,5 @@ body {
 @media (max-width: 500px) {
   html {
     font-size: 40%;
-    display: flex;
   }
 }

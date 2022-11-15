@@ -22,6 +22,11 @@ export const CreateTypeContainer = styled.div`
       height: 3.4rem;
       margin-left: 0.16rem;
     }
+    @media (min-width: 700px) {
+      width: 3.6rem;
+      height: 2.4rem;
+      margin-left: 0.08rem;
+    }
   }
   input[type="color"] {
     opacity: 0;
