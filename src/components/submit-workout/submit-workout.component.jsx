@@ -1,8 +1,16 @@
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { SubmitButton } from "./submit-workout.styles";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../../utils/firebase/firebase.utils";
 import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectTypes } from "../../store/types/types.selector";
 import {
   selectWorkoutData,
   selectCanSubmit,
@@ -13,6 +21,8 @@ import { canSubmitWorkout } from "../../store/workout-data/workout-data.action";
 const SubmitWorkout = () => {
   const workoutData = useSelector(selectWorkoutData);
   const nameAndType = useSelector(selectWorkoutNameAndType);
+  const currentUser = useSelector(selectCurrentUser);
+  const types = useSelector(selectTypes);
   const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
 
@@ -20,11 +30,16 @@ const SubmitWorkout = () => {
     // ao enviar limpoar o formfields e limpar o workoutData e mandar o workoutData para outro reducer que vai para o firebase
     dispatch(canSubmitWorkout(true));
     try {
-      console.log(workoutData);
-      const response = await addDoc(collection(db, "workouts"), {
+      const userUid = currentUser.uid;
+      // addDoc, firebase will create an ID for the document
+      const workoutDataResponse = await addDoc(collection(db, userUid), {
         workoutData,
         nameAndType,
         timeStamp: serverTimestamp(),
+      });
+      // setDoc, specific document, with ID of 'types'
+      const typesResponse = await setDoc(doc(db, userUid, "types"), {
+        types,
       });
     } catch (error) {
       console.log(error);
