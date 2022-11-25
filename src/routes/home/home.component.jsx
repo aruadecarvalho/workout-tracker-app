@@ -15,12 +15,14 @@ import {
   getWorkouts,
 } from "../../utils/firebase/firebase.utils";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { setUserTypes, setUserWorkouts } from "../../store/user/user.action";
 
 const Home = () => {
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
   const userUid = currentUser.uid;
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const Home = () => {
       }
     });
   }, []);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => navigate("/login"))
@@ -40,15 +43,16 @@ const Home = () => {
 
   // add this to a reducer
   useEffect(() => {
-    const getTypesData = async () => {
-      const data = await getTypes(userUid);
-      console.log(data);
+    const setTypesData = async () => {
+      const types = await getTypes(userUid);
+      dispatch(setUserTypes(types));
     };
     const getWorkoutData = async () => {
-      const data = await getWorkouts(userUid);
-      console.log(data.slice(0, -1));
+      const workouts = await getWorkouts(userUid);
+      console.log(workouts);
+      dispatch(setUserWorkouts(workouts));
     };
-    getTypesData();
+    setTypesData();
     getWorkoutData();
   }, []);
 

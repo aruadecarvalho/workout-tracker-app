@@ -33,5 +33,6 @@ export const getWorkouts = async (userUid) => {
   const colletionRef = collection(db, userUid);
   const q = query(colletionRef);
   const querySnap = await getDocs(q);
-  return querySnap.docs.map((doc) => doc.data());
+  const workouts = querySnap.docs.map((doc) => doc.data());
+  return workouts.slice(0, -1);
 };
