@@ -11,8 +11,10 @@ import {
 import { db } from "../../utils/firebase/firebase.utils";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentUser } from "../../store/user/user.selector";
-import { selectTypes } from "../../store/types/types.selector";
+import {
+  selectCurrentUser,
+  selectUserTypes,
+} from "../../store/user/user.selector";
 import {
   selectWorkoutData,
   selectCanSubmit,
@@ -24,7 +26,7 @@ const SubmitWorkout = () => {
   const workoutData = useSelector(selectWorkoutData);
   const nameAndType = useSelector(selectWorkoutNameAndType);
   const currentUser = useSelector(selectCurrentUser);
-  const types = useSelector(selectTypes);
+  const userTypes = useSelector(selectUserTypes);
   const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
 
@@ -42,7 +44,7 @@ const SubmitWorkout = () => {
       });
       // when I submit a new type I need to spread what types I had before in firebase and add the new one
       const typesResponse = await setDoc(doc(db, userUid, "types"), {
-        types,
+        userTypes,
       });
     } catch (error) {
       console.log(error);

@@ -13,16 +13,16 @@ import {
 import TypeModal from "../type-modal/type-modal.component";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectTypes } from "../../store/types/types.selector";
-import { addType } from "../../store/types/types.actions";
+import { selectUserTypes } from "../../store/user/user.selector";
 import { addNameAndType } from "../../store/workout-data/workout-data.action";
+import { addUserType } from "../../store/user/user.action";
 
 const NameTypeForm = () => {
   const [workoutName, setWorkoutName] = useState("");
   const [nameAndType, setNameAndType] = useState({});
   const [submitNewType, setSubmitNewType] = useState(false);
 
-  const types = useSelector(selectTypes);
+  const types = useSelector(selectUserTypes);
   const [showModal, setShowModal] = useState(false);
   const [colorPickerActive, setColorPickerActive] = useState(false);
   const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
@@ -84,7 +84,8 @@ const NameTypeForm = () => {
 
   useEffect(() => {
     if (submitNewType) {
-      dispatch(addType(newType));
+      // add new to type to userTypes
+      dispatch(addUserType(newType));
       setSubmitNewType(false);
     }
   }, [submitNewType]);

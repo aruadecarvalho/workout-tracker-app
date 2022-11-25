@@ -34,6 +34,15 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
         },
       };
     }
+    case USER_ACTION_TYPES.ADD_USER_TYPE: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          types: [...state.userData.types, payload],
+        },
+      };
+    }
     case USER_ACTION_TYPES.SIGN_OUT_USER:
       return {
         ...state,

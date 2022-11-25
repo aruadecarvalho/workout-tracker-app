@@ -41,7 +41,7 @@ const Home = () => {
       });
   };
 
-  // add this to a reducer
+  // add this to a reducer saga maybe
   useEffect(() => {
     const setTypesData = async () => {
       const types = await getTypes(userUid);
