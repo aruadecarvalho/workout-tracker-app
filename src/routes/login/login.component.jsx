@@ -1,15 +1,18 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { LoginContainer } from "./login.styles";
+import Button from "../../components/button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase/firebase.utils";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../store/user/user.action";
-import { LoginContainer } from "./login.styles";
-import Button from "../../components/button/button.component";
-import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
 
 const defaultRegisterInformation = {
   email: "",
@@ -72,6 +75,7 @@ const Login = () => {
       navigate("/");
     });
   };
+
   return (
     <LoginContainer>
       <div>
@@ -144,8 +148,6 @@ const Login = () => {
             </Button>
           </>
         )}
-
-        {/* if user clicks on create account, use the same form to create an account and just switch the buttons */}
       </div>
     </LoginContainer>
   );

@@ -1,5 +1,6 @@
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { SubmitButton } from "./submit-workout.styles";
+
 import {
   collection,
   addDoc,
@@ -8,6 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "../../utils/firebase/firebase.utils";
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectTypes } from "../../store/types/types.selector";
@@ -31,13 +33,13 @@ const SubmitWorkout = () => {
     dispatch(canSubmitWorkout(true));
     try {
       const userUid = currentUser.uid;
-      // addDoc, firebase will create an ID for the document
+
       const workoutDataResponse = await addDoc(collection(db, userUid), {
         workoutData,
         nameAndType,
         timeStamp: serverTimestamp(),
       });
-      // setDoc, specific document, with ID of 'types'
+
       const typesResponse = await setDoc(doc(db, userUid, "types"), {
         types,
       });

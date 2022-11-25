@@ -7,7 +7,9 @@ import {
   TypePreview,
   CreateTypeButton,
 } from "../name-type-form/name-type.form.styles";
+
 import CreateType from "../create-type/create-type.component";
+
 const TypeModal = ({
   types,
   showModal,
@@ -27,6 +29,7 @@ const TypeModal = ({
     handleNewType,
     handleSubmitNewType,
   };
+
   return (
     <>
       <TypeModalContainer show={showModal}>

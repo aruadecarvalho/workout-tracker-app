@@ -1,10 +1,13 @@
-import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "./store/user/user.selector";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import "./App.css";
+
 import Home from "./routes/home/home.component";
 import Login from "./routes/login/login.component";
-import "./App.css";
+
+import { selectCurrentUser } from "./store/user/user.selector";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);

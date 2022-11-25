@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import {
-  selectWorkoutData,
-  selectWorkoutNameAndType,
-} from "../../store/workout-data/workout-data.selector";
-import { selectTypes } from "../../store/types/types.selector";
-import { addType } from "../../store/types/types.actions";
-import { addNameAndType } from "../../store/workout-data/workout-data.action";
-// ! make the styles for this component more reusable
+
 import {
   NameTypeContainer,
   WorkoutNameInput,
@@ -18,7 +9,13 @@ import {
   TypeContainer,
   CreateTypeButton,
 } from "./name-type.form.styles";
+
 import TypeModal from "../type-modal/type-modal.component";
+
+import { useSelector, useDispatch } from "react-redux";
+import { selectTypes } from "../../store/types/types.selector";
+import { addType } from "../../store/types/types.actions";
+import { addNameAndType } from "../../store/workout-data/workout-data.action";
 
 const NameTypeForm = () => {
   const [workoutName, setWorkoutName] = useState("");
@@ -32,8 +29,6 @@ const NameTypeForm = () => {
   const [newType, setNewType] = useState({ name: "", color: "" });
 
   const dispatch = useDispatch();
-  const workoutData = useSelector(selectWorkoutData);
-  const workoutNameAndType = useSelector(selectWorkoutNameAndType);
 
   const handleNameChange = (event) => {
     const { name, value } = event.target;
