@@ -1,16 +1,27 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+
+import "./home.styles.scss";
+
 import WorkoutForm from "../../components/workout-form/workout-form.component";
 import SubmitWorkout from "../../components/submit-workout/submit-workout.component";
 import WorkoutItems from "../../components/workout-items/workout-items.component";
 import NameTypeForm from "../../components/name-type-form/name-type-form.component";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../utils/firebase/firebase.utils";
-import { useNavigate } from "react-router-dom";
-import "./home.styles.scss";
+
+import { signOut } from "firebase/auth";
+import {
+  auth,
+  getTypes,
+  getWorkouts,
+} from "../../utils/firebase/firebase.utils";
+
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 const Home = () => {
   const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
+  const userUid = currentUser.uid;
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -26,6 +37,21 @@ const Home = () => {
         console.log(error);
       });
   };
+
+  // add this to a reducer
+  useEffect(() => {
+    const getTypesData = async () => {
+      const data = await getTypes(userUid);
+      console.log(data);
+    };
+    const getWorkoutData = async () => {
+      const data = await getWorkouts(userUid);
+      console.log(data.slice(0, -1));
+    };
+    getTypesData();
+    getWorkoutData();
+  }, []);
+
   return (
     <div className="home-container">
       <div>
