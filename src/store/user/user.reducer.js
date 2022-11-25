@@ -2,6 +2,10 @@ import { USER_ACTION_TYPES } from "./user.types";
 
 const USER_INITIAL_STATE = {
   currentUser: JSON.parse(localStorage.getItem("currentUser")) || null,
+  userData: {
+    types: [],
+    workouts: [],
+  },
 };
 
 export const userReducer = (state = USER_INITIAL_STATE, action) => {
