@@ -21,6 +21,12 @@ export const workoutDataReducer = (
       return { ...state, canSubmitWorkout: payload };
     case WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_NAME_TYPE:
       return { ...state, nameAndType: payload };
+    case WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT:
+      return {
+        workoutData: payload,
+        canSubmitWorkout: false,
+        nameAndType: WORKOUT_DATA_INITIAL_STATE.nameAndType,
+      };
     default:
       return state;
   }
