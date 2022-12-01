@@ -18,10 +18,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { setUserTypes, setUserWorkouts } from "../../store/user/user.action";
+import { selectCanSubmit } from "../../store/workout-data/workout-data.selector";
 
 const Home = () => {
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
+  const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
   const userUid = currentUser.uid;
 
@@ -54,7 +56,7 @@ const Home = () => {
     };
     setTypesData();
     getWorkoutData();
-  }, []);
+  }, [, canSubmit]);
 
   return (
     <div className="home-container">

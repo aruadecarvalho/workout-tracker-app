@@ -26,7 +26,7 @@ export const getTypes = async (userUid) => {
   const docRef = doc(db, userUid, "types");
   const q = query(docRef);
   const querySnap = await getDoc(q);
-  return querySnap.data().types;
+  return querySnap.data().userTypes;
 };
 
 export const getWorkouts = async (userUid) => {
