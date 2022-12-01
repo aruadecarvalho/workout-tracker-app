@@ -14,7 +14,7 @@ const createType = ({
       isActive={colorPickerActive}
       createNewTypeActive={createNewTypeActive}
     >
-      <div className="color-picker">
+      <div>
         <input type="color" name="color" onChange={handleNewType} />
       </div>
       <input type="text" onChange={handleNewType} name="name" />

@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUserTypes } from "../../store/user/user.selector";
 import { addNameAndType } from "../../store/workout-data/workout-data.action";
 import { addUserType } from "../../store/user/user.action";
+import { selectCanSubmit } from "../../store/workout-data/workout-data.selector";
 
 const NameTypeForm = () => {
   const [workoutName, setWorkoutName] = useState("");
@@ -28,7 +29,10 @@ const NameTypeForm = () => {
   const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
   const [newType, setNewType] = useState({ name: "", color: "" });
 
+  const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
+
+  useEffect(() => setWorkoutName(""), [canSubmit]);
 
   const handleNameChange = (event) => {
     const { name, value } = event.target;

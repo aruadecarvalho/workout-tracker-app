@@ -31,9 +31,6 @@ const SubmitWorkout = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {
-    // ao enviar limpoar o formfields e limpar o workoutData e mandar o workoutData para outro reducer que vai para o firebase
-    // when submited fecth from firebase again
-    dispatch(canSubmitWorkout(true));
     try {
       const userUid = currentUser.uid;
 
@@ -42,15 +39,16 @@ const SubmitWorkout = () => {
         nameAndType,
         timeStamp: serverTimestamp(),
       });
-      // when I submit a new type I need to spread what types I had before in firebase and add the new one
+
       const typesResponse = await setDoc(doc(db, userUid, "types"), {
         userTypes,
       });
+      dispatch(canSubmitWorkout(true));
     } catch (error) {
       console.log(error);
     }
   };
-  // limpar formFields quando enviar, criar um reducer para isso
+
   return (
     <SubmitButton
       onClick={handleSubmit}
