@@ -47,9 +47,12 @@ export const AddNewTypeButton = styled(Button)`
   position: absolute;
   width: 15rem;
   transform: scale(0.7);
-  bottom: -115%;
+  bottom: -225%;
   right: -30%;
+  @media (max-width: 700px) {
+    bottom: -200%;
+  }
   @media (max-width: 500px) {
-    transform: scale(0.6);
+    bottom: -180%;
   }
 `;
