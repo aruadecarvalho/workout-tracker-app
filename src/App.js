@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./routes/home/home.component";
 import Login from "./routes/login/login.component";
+import Workouts from "./routes/workouts/workouts.component";
 
 import { selectCurrentUser } from "./store/user/user.selector";
 import { useSelector } from "react-redux";
@@ -27,6 +28,14 @@ const App = () => {
           element={
             <RequireAuth>
               <Home />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="workouts"
+          element={
+            <RequireAuth>
+              <Workouts />
             </RequireAuth>
           }
         />

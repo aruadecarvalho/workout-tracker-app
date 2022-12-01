@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import "./home.styles.scss";
 
@@ -9,11 +9,7 @@ import SubmitWorkout from "../../components/submit-workout/submit-workout.compon
 import WorkoutItems from "../../components/workout-items/workout-items.component";
 import NameTypeForm from "../../components/name-type-form/name-type-form.component";
 
-import {
-  auth,
-  getTypes,
-  getWorkouts,
-} from "../../utils/firebase/firebase.utils";
+import { getTypes, getWorkouts } from "../../utils/firebase/firebase.utils";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
@@ -21,19 +17,10 @@ import { setUserTypes, setUserWorkouts } from "../../store/user/user.action";
 import { selectCanSubmit } from "../../store/workout-data/workout-data.selector";
 
 const Home = () => {
-  const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
   const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
   const userUid = currentUser.uid;
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (!user) {
-        navigate("/login");
-      }
-    });
-  }, []);
 
   // add this to a reducer saga maybe
   useEffect(() => {

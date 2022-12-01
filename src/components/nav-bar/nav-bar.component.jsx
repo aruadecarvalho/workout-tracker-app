@@ -17,13 +17,16 @@ const NavBar = () => {
       });
   };
 
+  const handleWorkoutsRoute = () => {
+    navigate("/workouts");
+  };
   return (
     <NavBarContiner>
       <div>
         <SignOutButton onClick={handleSignOut}>Signout</SignOutButton>
       </div>
       <div>
-        <WorkoutsButton />
+        <WorkoutsButton onClick={handleWorkoutsRoute} />
         <TypesButton />
       </div>
     </NavBarContiner>
