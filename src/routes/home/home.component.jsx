@@ -4,11 +4,11 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "./home.styles.scss";
 
 import WorkoutForm from "../../components/workout-form/workout-form.component";
+import NavBar from "../../components/nav-bar/nav-bar.component";
 import SubmitWorkout from "../../components/submit-workout/submit-workout.component";
 import WorkoutItems from "../../components/workout-items/workout-items.component";
 import NameTypeForm from "../../components/name-type-form/name-type-form.component";
 
-import { signOut } from "firebase/auth";
 import {
   auth,
   getTypes,
@@ -35,14 +35,6 @@ const Home = () => {
     });
   }, []);
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => navigate("/login"))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   // add this to a reducer saga maybe
   useEffect(() => {
     const setTypesData = async () => {
@@ -61,7 +53,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <div>
-        <button onClick={handleSignOut}>signout</button>
+        <NavBar />
         <h1>Let's workout!</h1>
         <NameTypeForm />
         <WorkoutForm />
