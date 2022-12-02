@@ -37,7 +37,11 @@ const TypeModal = ({
           return (
             <TypeModalItem key={key} onClick={() => handleSelectType(type)}>
               <TypePreview color={type.color} />
-              <p>{type.name}</p>
+              <p>
+                {type.name.length > 8
+                  ? `${type.name.slice(0, 8)}...`
+                  : type.name}
+              </p>
             </TypeModalItem>
           );
         })}
