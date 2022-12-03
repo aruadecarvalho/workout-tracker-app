@@ -2,6 +2,7 @@ import {
   TypeModalContainer,
   BackdropModal,
   TypeModalItem,
+  TypeModalItemContainer,
 } from "./type-modal.styles";
 import {
   TypePreview,
@@ -29,22 +30,25 @@ const TypeModal = ({
     handleNewType,
     handleSubmitNewType,
   };
-
   return (
     <>
       <TypeModalContainer show={showModal}>
-        {types.map((type, key) => {
-          return (
-            <TypeModalItem key={key} onClick={() => handleSelectType(type)}>
-              <TypePreview color={type.color} />
-              <p>
-                {type.name.length > 8
-                  ? `${type.name.slice(0, 8)}...`
-                  : type.name}
-              </p>
-            </TypeModalItem>
-          );
-        })}
+        {types && (
+          <TypeModalItemContainer>
+            {types.map((type, key) => {
+              return (
+                <TypeModalItem key={key} onClick={() => handleSelectType(type)}>
+                  <TypePreview color={type.color} />
+                  <p>
+                    {type && type.name.length > 8
+                      ? `${type.name.slice(0, 8)}...`
+                      : type.name}
+                  </p>
+                </TypeModalItem>
+              );
+            })}
+          </TypeModalItemContainer>
+        )}
         <TypeModalItem onClick={handleCreateNewType}>
           <TypePreview>
             <CreateTypeButton onClick={handleNewType} />

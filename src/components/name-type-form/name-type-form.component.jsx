@@ -111,11 +111,9 @@ const NameTypeForm = () => {
             <CreateTypeButton onClick={handleNewType} />
           </TypePreview>
         </TypeContainer>
-        {types && (
-          <>
-            <TypeModal {...typeModalProps} />
-          </>
-        )}
+        <>
+          <TypeModal {...typeModalProps} />
+        </>
       </SelectTypeContainer>
       <WorkoutNameInput
         type="text"
