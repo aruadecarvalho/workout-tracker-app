@@ -16,6 +16,7 @@ import {
   selectWorkoutData,
   selectCanSubmit,
 } from "../../store/workout-data/workout-data.selector";
+
 const defaultFormFields = {
   exerciseName: "",
   setsNumber: "",
