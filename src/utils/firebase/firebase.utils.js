@@ -7,7 +7,6 @@ import {
   query,
   getDocs,
   collection,
-  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -26,6 +25,9 @@ export const auth = getAuth();
 export const getUserData = async (userUid) => {
   const userDocRef = doc(db, "users", userUid);
   const userSnapshot = await getDoc(userDocRef);
+  if (!userSnapshot.exists()) {
+    return { types: [], workouts: [] };
+  }
   return userSnapshot.data();
 };
 

@@ -3,8 +3,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 const USER_INITIAL_STATE = {
   currentUser: JSON.parse(localStorage.getItem("currentUser")) || null,
   userData: {
-    types: "",
-    workouts: [""],
+    types: [],
+    workouts: [],
   },
 };
 
@@ -16,22 +16,10 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
         ...state,
         currentUser: payload,
       };
-    case USER_ACTION_TYPES.SET_USER_TYPES: {
+    case USER_ACTION_TYPES.SET_USER_DATA: {
       return {
         ...state,
-        userData: {
-          ...state.userData,
-          types: payload,
-        },
-      };
-    }
-    case USER_ACTION_TYPES.SET_USER_WORKOUTS: {
-      return {
-        ...state,
-        userData: {
-          ...state.userData,
-          workouts: payload,
-        },
+        userData: payload,
       };
     }
     case USER_ACTION_TYPES.ADD_USER_TYPE: {
@@ -39,7 +27,9 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
         ...state,
         userData: {
           ...state.userData,
-          types: [...state.userData.types, payload],
+          types: state.userData.types
+            ? [...state.userData.types, payload]
+            : [payload],
         },
       };
     }
