@@ -7,6 +7,7 @@ import {
   query,
   getDocs,
   collection,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -22,11 +23,10 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth();
 
-export const getTypes = async (userUid) => {
-  const docRef = doc(db, userUid, "types");
-  const q = query(docRef);
-  const querySnap = await getDoc(q);
-  return querySnap.data().userTypes;
+export const getUserData = async (userUid) => {
+  const userDocRef = doc(db, "users", userUid);
+  const userSnapshot = await getDoc(userDocRef);
+  return userSnapshot.data();
 };
 
 export const getWorkouts = async (userUid) => {
