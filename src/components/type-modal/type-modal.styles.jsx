@@ -25,6 +25,26 @@ export const TypeModalContainer = styled.div`
   }
 `;
 
+export const TypeModalItemContainer = styled.div`
+  max-height: 10rem;
+  width: 12rem;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #272729;
+  }
+`;
+
 export const TypeModalItem = styled.div`
   ${slideInEliptic}
   display: flex;
