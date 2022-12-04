@@ -17,10 +17,6 @@ export const addNameAndType = (dataToAdd) => {
   );
 };
 
-export const canSubmitWorkout = (canSubmit) => {
-  return createAction(WORKOUT_DATA_ACTION_TYPES.CAN_SUBMIT_WORKOUT, canSubmit);
-};
-
 export const clearWorkoutData = (workout = []) => {
   return createAction(WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT, workout);
 };
