@@ -14,7 +14,7 @@ import CreateType from "../create-type/create-type.component";
 const TypeModal = ({
   types,
   showModal,
-  setModal,
+  handleSetModal,
   handleSelectType,
   handleNewType,
   handleCreateNewType,
@@ -57,7 +57,7 @@ const TypeModal = ({
         </TypeModalItem>
         <CreateType {...createTypeProps} />
       </TypeModalContainer>
-      <BackdropModal onClick={setModal} show={showModal} />
+      <BackdropModal onClick={handleSetModal} show={showModal} />
     </>
   );
 };

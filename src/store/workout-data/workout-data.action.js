@@ -17,6 +17,6 @@ export const addNameAndType = (dataToAdd) => {
   );
 };
 
-export const clearWorkoutData = (workout = []) => {
-  return createAction(WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT, workout);
+export const clearWorkoutData = () => {
+  return createAction(WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT);
 };

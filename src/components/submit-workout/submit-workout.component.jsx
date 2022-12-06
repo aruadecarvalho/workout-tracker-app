@@ -14,7 +14,7 @@ import {
   selectWorkoutData,
   selectWorkoutNameAndType,
 } from "../../store/workout-data/workout-data.selector";
-import { canSubmitWorkout } from "../../store/workout-data/workout-data.action";
+import { clearWorkoutData } from "../../store/workout-data/workout-data.action";
 
 const SubmitWorkout = () => {
   const workoutData = useSelector(selectWorkoutData);
@@ -34,8 +34,7 @@ const SubmitWorkout = () => {
         workouts: updatedWorkouts,
         types: userTypes,
       });
-
-      dispatch(canSubmitWorkout(true));
+      dispatch(clearWorkoutData());
     } catch (error) {
       console.log(error);
     }

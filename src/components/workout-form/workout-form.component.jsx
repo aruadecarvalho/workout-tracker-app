@@ -18,30 +18,13 @@ const defaultFormFields = {
 };
 
 const WorkoutForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const workoutData = useSelector(selectWorkoutData);
-  const [isEmpty, setIsEmpty] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "setsNumber") {
-      const valueMax = value > 9 ? 9 : value;
-      setFormFields({ ...formFields, [name]: valueMax });
-    } else if (name === "exerciseName") {
-      setFormFields({ ...formFields, [name]: value });
-    } else {
-      const { id } = event.target;
-      setFormFields({
-        ...formFields,
-        sets: {
-          ...formFields.sets,
-          [id]: { ...formFields.sets[id], [name]: value },
-        },
-      });
-    }
-  };
+  const workoutData = useSelector(selectWorkoutData);
+
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [isEmpty, setIsEmpty] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (!formFields.exerciseName || !formFields.setsNumber) {
@@ -63,6 +46,25 @@ const WorkoutForm = () => {
     }
     setIsEmpty("");
   }, [formFields]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "setsNumber") {
+      const valueMax = value > 9 ? 9 : value;
+      setFormFields({ ...formFields, [name]: valueMax });
+    } else if (name === "exerciseName") {
+      setFormFields({ ...formFields, [name]: value });
+    } else {
+      const { id } = event.target;
+      setFormFields({
+        ...formFields,
+        sets: {
+          ...formFields.sets,
+          [id]: { ...formFields.sets[id], [name]: value },
+        },
+      });
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();

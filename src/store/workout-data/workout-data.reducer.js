@@ -20,8 +20,11 @@ export const workoutDataReducer = (
       return { ...state, nameAndType: payload };
     case WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT:
       return {
-        workoutData: payload,
-        nameAndType: WORKOUT_DATA_INITIAL_STATE.nameAndType,
+        workoutData: [],
+        nameAndType: {
+          name: "",
+          type: { name: "", color: "" },
+        },
       };
     default:
       return state;
