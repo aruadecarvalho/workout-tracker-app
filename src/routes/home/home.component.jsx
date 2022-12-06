@@ -9,28 +9,21 @@ import SubmitWorkout from "../../components/submit-workout/submit-workout.compon
 import WorkoutItems from "../../components/workout-items/workout-items.component";
 import NameTypeForm from "../../components/name-type-form/name-type-form.component";
 
-import { getUserData } from "../../utils/firebase/firebase.utils";
-import { setUserData } from "../../store/user/user.action";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
-import { selectCanSubmit } from "../../store/workout-data/workout-data.selector";
+import {
+  fetchUserTypesStart,
+  fetchUserWorkoutsStart,
+} from "../../store/user/user.action";
 
 const Home = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const canSubmit = useSelector(selectCanSubmit);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userUid = currentUser.uid;
-    const fetchUserData = async (userUid) => {
-      const response = await getUserData(userUid);
-      const types = await response.types;
-      const workouts = await response.workouts;
-      const data = { workouts, types };
-      dispatch(setUserData(data));
-    };
-    fetchUserData(userUid);
-  }, [canSubmit]);
+    dispatch(fetchUserWorkoutsStart());
+    dispatch(fetchUserTypesStart());
+  }, []);
 
   return (
     <div className="home-container">

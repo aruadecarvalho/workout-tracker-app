@@ -6,6 +6,7 @@ const USER_INITIAL_STATE = {
     types: [],
     workouts: [],
   },
+  error: null,
 };
 
 export const userReducer = (state = USER_INITIAL_STATE, action) => {
@@ -16,11 +17,20 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
         ...state,
         currentUser: payload,
       };
-    case USER_ACTION_TYPES.SET_USER_DATA: {
+    case USER_ACTION_TYPES.FETCH_WORKOUTS_SUCCESS: {
       return {
         ...state,
-        userData: payload,
+        userData: { ...state.userData, workouts: payload },
       };
+    }
+    case USER_ACTION_TYPES.FETCH_TYPES_SUCCESS: {
+      return {
+        ...state,
+        userData: { ...state.userData, types: payload },
+      };
+    }
+    case USER_ACTION_TYPES.FETCH_FAILED: {
+      return { ...state, error: payload };
     }
     case USER_ACTION_TYPES.ADD_USER_TYPE: {
       return {

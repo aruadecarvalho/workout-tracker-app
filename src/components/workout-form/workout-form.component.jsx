@@ -7,15 +7,9 @@ import {
   ErrorMessage,
 } from "./workout-form.styles.jsx";
 import Button from "../button/button.component";
-import {
-  addData,
-  clearWorkoutData,
-} from "../../store/workout-data/workout-data.action";
+import { addData } from "../../store/workout-data/workout-data.action";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectWorkoutData,
-  selectCanSubmit,
-} from "../../store/workout-data/workout-data.selector";
+import { selectWorkoutData } from "../../store/workout-data/workout-data.selector";
 
 const defaultFormFields = {
   exerciseName: "",
@@ -26,14 +20,9 @@ const defaultFormFields = {
 const WorkoutForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const workoutData = useSelector(selectWorkoutData);
-  const canSubmit = useSelector(selectCanSubmit);
   const [isEmpty, setIsEmpty] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(clearWorkoutData());
-  }, [canSubmit]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
