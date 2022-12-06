@@ -1,5 +1,8 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { getUserData } from "../../utils/firebase/firebase.utils";
+import {
+  getUserData,
+  uploadUserType,
+} from "../../utils/firebase/firebase.utils";
 
 import { USER_ACTION_TYPES } from "./user.types";
 import { getCurrentUserUid } from "../../utils/firebase/firebase.utils";
@@ -31,6 +34,16 @@ export function* fetchTypesAsync() {
   }
 }
 
+export function* uploadUserTypes(action) {
+  const uid = yield call(getCurrentUserUid);
+  const type = yield action.payload;
+  yield uploadUserType(uid, type);
+}
+
+export function* onUploadUserTypes() {
+  yield takeLatest(USER_ACTION_TYPES.ADD_USER_TYPE, uploadUserTypes);
+}
+
 export function* onFetchTypes() {
   yield takeLatest(USER_ACTION_TYPES.FETCH_TYPES_START, fetchTypesAsync);
 }
@@ -40,5 +53,9 @@ export function* onFetchWorkouts() {
 }
 
 export function* userSagas() {
-  yield all([call(onFetchWorkouts)]);
+  yield all([
+    call(onFetchWorkouts),
+    call(onFetchTypes),
+    call(onUploadUserTypes),
+  ]);
 }
