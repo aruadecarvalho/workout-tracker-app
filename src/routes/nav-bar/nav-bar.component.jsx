@@ -1,12 +1,13 @@
 import {
   SignOutButton,
   NavBarContiner,
+  HomeButton,
   TypesButton,
   WorkoutsButton,
 } from "./nav-bar.styles";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase/firebase.utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 const NavBar = () => {
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -20,16 +21,24 @@ const NavBar = () => {
   const handleWorkoutsRoute = () => {
     navigate("/workouts");
   };
+
+  const handleHomeRoute = () => {
+    navigate("/");
+  };
   return (
-    <NavBarContiner>
-      <div>
-        <SignOutButton onClick={handleSignOut}>Signout</SignOutButton>
-      </div>
-      <div>
-        <WorkoutsButton onClick={handleWorkoutsRoute} />
-        <TypesButton />
-      </div>
-    </NavBarContiner>
+    <>
+      <NavBarContiner>
+        <div>
+          <SignOutButton onClick={handleSignOut}>Signout</SignOutButton>
+        </div>
+        <div>
+          <HomeButton onClick={handleHomeRoute} />
+          <WorkoutsButton onClick={handleWorkoutsRoute} />
+          <TypesButton />
+        </div>
+      </NavBarContiner>
+      <Outlet />
+    </>
   );
 };
 

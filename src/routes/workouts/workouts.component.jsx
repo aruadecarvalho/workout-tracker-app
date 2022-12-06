@@ -1,5 +1,11 @@
+import { WorkoutsContainer } from "./workouts.styles";
+
 export const Workouts = () => {
-  return <h1>Workouts</h1>;
+  return (
+    <WorkoutsContainer>
+      <h1>Workouts</h1>;
+    </WorkoutsContainer>
+  );
 };
 
 export default Workouts;

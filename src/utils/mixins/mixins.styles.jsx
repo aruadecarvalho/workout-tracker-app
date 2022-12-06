@@ -49,3 +49,7 @@ export const inputStyle = css`
     outline: none;
   }
 `;
+
+export const containerWidth = css`
+  width: 35rem;
+`;

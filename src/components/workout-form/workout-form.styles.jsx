@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { inputStyle } from "../../utils/mixins/mixins.styles";
+import { inputStyle, containerWidth } from "../../utils/mixins/mixins.styles";
 
 export const FormContainer = styled.form`
-  width: 35rem;
+  ${containerWidth}
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background-color: #fff;
