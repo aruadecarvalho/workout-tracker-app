@@ -1,7 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
-  collection,
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import {
   doc,
   getDoc,
   getFirestore,
@@ -22,31 +27,34 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth();
 
-export const getUserData = async (userUid) => {
-  const userDocRef = doc(db, "users", userUid);
+export const createUserDocumentFromAuth = async (userAuth) => {
+  if (!userAuth) return;
+
+  const userDocRef = doc(db, "users", userAuth.uid);
+
   const userSnapshot = await getDoc(userDocRef);
+
   if (!userSnapshot.exists()) {
-    await setDoc(userDocRef, { types: [], workouts: [] });
-    return { types: [], workouts: [] };
+    try {
+      await setDoc(userDocRef, { types: [], workouts: [] });
+    } catch (error) {
+      console.log("error creating user doc", error);
+    }
   }
-  return userSnapshot.data();
+  return userSnapshot;
 };
 
-export const uploadUserType = async (userUid, type) => {
-  const userDocRef = doc(db, "users", userUid);
-  const userSnapshot = await getDoc(userDocRef);
-  if (!userSnapshot.exists()) {
-    await setDoc(userDocRef, { types: [type], workouts: [] });
-    return;
-  }
-  const { types, workouts } = userSnapshot.data();
-  if (types.includes(type)) {
-    return;
-  }
-  await updateDoc(userDocRef, {
-    types: [...types, type],
-  });
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => await signOut(auth);
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
@@ -65,4 +73,26 @@ export const getCurrentUserUid = async () => {
   const userAuth = await getCurrentUser();
   const uid = userAuth.uid;
   return uid;
+};
+
+export const getUserData = async (userUid) => {
+  const userDocRef = doc(db, "users", userUid);
+  const userSnapshot = await getDoc(userDocRef);
+  return userSnapshot.data();
+};
+
+export const uploadUserType = async (userUid, type) => {
+  const userDocRef = doc(db, "users", userUid);
+  const userSnapshot = await getDoc(userDocRef);
+  if (!userSnapshot.exists()) {
+    await setDoc(userDocRef, { types: [type], workouts: [] });
+    return;
+  }
+  const { types, workouts } = userSnapshot.data();
+  if (types.includes(type)) {
+    return;
+  }
+  await updateDoc(userDocRef, {
+    types: [...types, type],
+  });
 };
