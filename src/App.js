@@ -6,39 +6,51 @@ import Login from "./routes/login/login.component";
 import Workouts from "./routes/workouts/workouts.component";
 
 import { selectCurrentUser } from "./store/user/user.selector";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { checkUserSession } from "./store/user/user.action";
+import NavBar from "./routes/nav-bar/nav-bar.component";
 
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
-
+  const dispatch = useDispatch();
   const RequireAuth = ({ children }) => {
+    console.log(currentUser);
     return currentUser ? children : <Navigate to="/login" />;
   };
 
   useEffect(() => {
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  }, [currentUser]);
+    dispatch(checkUserSession());
+  }, []);
 
   return (
     <Routes>
       <Route>
         <Route path="login" element={<Login />} />
         <Route
-          index
+          path="/"
           element={
             <RequireAuth>
-              <Home />
+              <NavBar />
             </RequireAuth>
           }
-        />
-        <Route
-          path="workouts"
-          element={
-            <RequireAuth>
-              <Workouts />
-            </RequireAuth>
-          }
-        />
+        >
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="workouts"
+            element={
+              <RequireAuth>
+                <Workouts />
+              </RequireAuth>
+            }
+          />
+        </Route>
       </Route>
     </Routes>
   );

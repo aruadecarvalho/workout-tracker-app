@@ -5,14 +5,10 @@ import { LoginContainer } from "./login.styles";
 import Button from "../../components/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
 
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../utils/firebase/firebase.utils";
-
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../store/user/user.action";
+import { useDispatch, useSelector } from "react-redux";
+import { signInStart, signUpStart } from "../../store/user/user.action";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { useEffect } from "react";
 
 const defaultRegisterInformation = {
   email: "",
@@ -22,29 +18,31 @@ const defaultRegisterInformation = {
 };
 
 const Login = () => {
+  const currentUser = useSelector(selectCurrentUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [registerInformation, setRegisterInformation] = useState(
     defaultRegisterInformation
   );
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogin = (event) => {
     event.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        dispatch(setCurrentUser(user));
-        navigate("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    try {
+      dispatch(signInStart(email, password));
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
   };
 
   const handleEmailChange = (event) => {
@@ -67,13 +65,9 @@ const Login = () => {
       return;
       // ! add error message
     }
-    createUserWithEmailAndPassword(
-      auth,
-      registerInformation.email,
-      registerInformation.password
-    ).then(() => {
-      navigate("/");
-    });
+    dispatch(
+      signUpStart(registerInformation.email, registerInformation.password)
+    );
   };
 
   return (

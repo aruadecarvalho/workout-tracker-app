@@ -5,17 +5,15 @@ import {
   TypesButton,
   WorkoutsButton,
 } from "./nav-bar.styles";
-import { signOut } from "firebase/auth";
-import { auth } from "../../utils/firebase/firebase.utils";
+import { useDispatch } from "react-redux";
 import { useNavigate, Outlet } from "react-router-dom";
+import { signOutStart } from "../../store/user/user.action";
 const NavBar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => navigate("/login"))
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(signOutStart());
+    navigate("/login");
   };
 
   const handleWorkoutsRoute = () => {
@@ -25,6 +23,7 @@ const NavBar = () => {
   const handleHomeRoute = () => {
     navigate("/");
   };
+
   return (
     <>
       <NavBarContiner>
