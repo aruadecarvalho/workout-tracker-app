@@ -5,6 +5,8 @@ export const addUserType = (type) => {
   return createAction(USER_ACTION_TYPES.ADD_USER_TYPE, type);
 };
 
+export const stopLoading = () => createAction(USER_ACTION_TYPES.STOP_LOADING);
+
 // User session
 export const setCurrentUser = (user) =>
   createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user);

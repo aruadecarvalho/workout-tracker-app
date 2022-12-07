@@ -26,13 +26,17 @@ import {
   signInSuccess,
   signUpFailed,
   signUpSuccess,
+  stopLoading,
 } from "./user.action";
 
 // onCheckUserSession
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield call(getCurrentUser);
-    if (!userAuth) return;
+    if (!userAuth) {
+      yield put(stopLoading());
+      return;
+    }
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
     yield put(signInFailed(error));

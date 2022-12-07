@@ -14,7 +14,6 @@ const App = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const RequireAuth = ({ children }) => {
-    console.log(currentUser);
     return currentUser ? children : <Navigate to="/login" />;
   };
 
