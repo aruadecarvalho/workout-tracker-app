@@ -14,3 +14,10 @@ export const selectWorkoutNameAndType = createSelector(
   [selectWorkoutNameAndTypeReducer],
   (nameAndType) => nameAndType
 );
+
+const selectFormFieldsReducer = (state) => state.workoutData.formFields;
+
+export const selectFormFields = createSelector(
+  [selectFormFieldsReducer],
+  (formFields) => formFields
+);

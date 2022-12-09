@@ -17,6 +17,28 @@ export const addNameAndType = (dataToAdd) => {
   );
 };
 
+export const addFormFieldsSetAndName = (name, value) => {
+  return createAction(WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS_NAME_AND_SET, {
+    name,
+    value,
+  });
+};
+
+export const addFormFieldsWeightAndRep = (name, value, id) => {
+  return createAction(
+    WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS_WEIGHT_AND_REP,
+    {
+      name,
+      value,
+      id,
+    }
+  );
+};
+
 export const clearWorkoutData = () => {
   return createAction(WORKOUT_DATA_ACTION_TYPES.CLEAR_WORKOUT);
+};
+
+export const clearFormFields = () => {
+  return createAction(WORKOUT_DATA_ACTION_TYPES.CLEAR_FORM_FIELDS);
 };

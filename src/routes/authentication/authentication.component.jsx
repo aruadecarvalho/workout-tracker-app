@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button.component";
 import Spinner from "../../components/spinner/spinner.component";
 
-import { LoginContainer } from "./login.styles";
+import { AuthContainer } from "./authentication.styles";
 import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,7 @@ const defaultRegisterInformation = {
   confirmPassword: "",
 };
 
-const Login = () => {
+const Authentication = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -80,7 +80,7 @@ const Login = () => {
   };
 
   return (
-    <LoginContainer>
+    <AuthContainer>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -156,8 +156,8 @@ const Login = () => {
           )}
         </div>
       )}
-    </LoginContainer>
+    </AuthContainer>
   );
 };
 
-export default Login;
+export default Authentication;

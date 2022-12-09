@@ -7,22 +7,23 @@ import {
   ErrorMessage,
 } from "./workout-form.styles.jsx";
 import Button from "../button/button.component";
-import { addData } from "../../store/workout-data/workout-data.action";
+import {
+  addData,
+  addFormFieldsSetAndName,
+  addFormFieldsWeightAndRep,
+  clearFormFields,
+} from "../../store/workout-data/workout-data.action";
 import { useSelector, useDispatch } from "react-redux";
-import { selectWorkoutData } from "../../store/workout-data/workout-data.selector";
-
-const defaultFormFields = {
-  exerciseName: "",
-  setsNumber: "",
-  sets: {},
-};
+import {
+  selectFormFields,
+  selectWorkoutData,
+} from "../../store/workout-data/workout-data.selector";
 
 const WorkoutForm = () => {
   const dispatch = useDispatch();
-
+  const formFields = useSelector(selectFormFields);
   const workoutData = useSelector(selectWorkoutData);
 
-  const [formFields, setFormFields] = useState(defaultFormFields);
   const [isEmpty, setIsEmpty] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -50,19 +51,13 @@ const WorkoutForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "setsNumber") {
-      const valueMax = value > 9 ? 9 : value;
-      setFormFields({ ...formFields, [name]: valueMax });
+      if (isNaN(value) || value > 9) return;
+      dispatch(addFormFieldsSetAndName(name, value));
     } else if (name === "exerciseName") {
-      setFormFields({ ...formFields, [name]: value });
+      dispatch(addFormFieldsSetAndName(name, value));
     } else {
       const { id } = event.target;
-      setFormFields({
-        ...formFields,
-        sets: {
-          ...formFields.sets,
-          [id]: { ...formFields.sets[id], [name]: value },
-        },
-      });
+      dispatch(addFormFieldsWeightAndRep(name, value, id));
     }
   };
 
@@ -71,7 +66,7 @@ const WorkoutForm = () => {
     setIsSubmitted(true);
     if (isEmpty) return;
     dispatch(addData(workoutData, formFields));
-    setFormFields(defaultFormFields);
+    dispatch(clearFormFields());
     setIsSubmitted(false);
   };
 

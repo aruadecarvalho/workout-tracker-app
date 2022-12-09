@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./routes/home/home.component";
-import Login from "./routes/login/login.component";
+import Authentication from "./routes/authentication/authentication.component";
 import Workouts from "./routes/workouts/workouts.component";
 
 import { selectCurrentUser } from "./store/user/user.selector";
@@ -13,6 +13,7 @@ import NavBar from "./routes/nav-bar/nav-bar.component";
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <Routes>
       <Route>
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Authentication />} />
         <Route
           path="/"
           element={

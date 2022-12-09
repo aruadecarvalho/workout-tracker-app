@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { inputStyle } from "../../utils/mixins/mixins.styles";
 
-export const LoginContainer = styled.div`
+export const AuthContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
