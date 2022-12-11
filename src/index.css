@@ -31,12 +31,6 @@ body {
 
 @media (max-width: 768px) {
   html {
-    font-size: 50%;
-  }
-}
-
-@media (max-width: 500px) {
-  html {
-    font-size: 40%;
+    font-size: 56.25%;
   }
 }
