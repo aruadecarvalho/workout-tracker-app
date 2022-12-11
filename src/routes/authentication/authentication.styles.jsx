@@ -21,3 +21,11 @@ export const AuthContainer = styled.div`
     }
   }
 `;
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 1.2rem;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(110%);
+`;

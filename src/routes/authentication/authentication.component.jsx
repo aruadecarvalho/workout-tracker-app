@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Button from "../../components/button/button.component";
 import Spinner from "../../components/spinner/spinner.component";
 
 import { AuthContainer } from "./authentication.styles";
-import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
 
 import { useDispatch, useSelector } from "react-redux";
 import { signInStart, signUpStart } from "../../store/user/user.action";
@@ -15,6 +13,7 @@ import {
 } from "../../store/user/user.selector";
 import { useEffect } from "react";
 import SignIn from "../../components/sign-in/sign-in.component";
+import SignUp from "../../components/sign-up/sign-up.component";
 
 const defaultRegisterInformation = {
   email: "",
@@ -36,6 +35,7 @@ const Authentication = () => {
   const [registerInformation, setRegisterInformation] = useState(
     defaultRegisterInformation
   );
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (currentUser) {
@@ -49,9 +49,7 @@ const Authentication = () => {
     try {
       dispatch(signInStart(email, password));
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      console.log(error);
     }
   };
 
@@ -72,8 +70,8 @@ const Authentication = () => {
       registerInformation.email !== registerInformation.confirmEmail ||
       registerInformation.password !== registerInformation.confirmPassword
     ) {
+      setError("Email or password do not match");
       return;
-      // ! add error message
     }
     dispatch(
       signUpStart(registerInformation.email, registerInformation.password)
@@ -88,46 +86,13 @@ const Authentication = () => {
         <div>
           {isRegistering ? (
             <>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={registerInformation.email}
-                onChange={handleRegisterOnChange}
+              <SignUp
+                registerInformation={registerInformation}
+                handleRegisterOnChange={handleRegisterOnChange}
+                handleRegister={handleRegister}
+                setIsRegistering={setIsRegistering}
+                error={error}
               />
-              <input
-                type="email"
-                placeholder="Confirm email"
-                name="confirmEmail"
-                value={registerInformation.confirmEmail}
-                onChange={handleRegisterOnChange}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={registerInformation.password}
-                onChange={handleRegisterOnChange}
-              />
-              <input
-                type="password"
-                placeholder="Confirm password"
-                name="confirmPassword"
-                value={registerInformation.confirmPassword}
-                onChange={handleRegisterOnChange}
-              />
-              <Button
-                buttonType={BUTTON_TYPE_CLASSES.inverted}
-                onClick={handleRegister}
-              >
-                Register
-              </Button>
-              <Button
-                buttonType={BUTTON_TYPE_CLASSES.base}
-                onClick={() => setIsRegistering(false)}
-              >
-                Go back
-              </Button>
             </>
           ) : (
             <>

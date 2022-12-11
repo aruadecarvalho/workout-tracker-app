@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { SubmitButton, SubmitContainer } from "./submit-workout.styles";
+import { SubmitButton } from "./submit-workout.styles";
 import { ErrorMessage } from "../workout-form/workout-form.styles";
 
 import { doc, setDoc } from "firebase/firestore";
@@ -18,6 +18,7 @@ import {
   selectWorkoutNameAndType,
 } from "../../store/workout-data/workout-data.selector";
 import { clearWorkoutData } from "../../store/workout-data/workout-data.action";
+import { RelativeContainer } from "../../utils/mixins/mixins.styles";
 
 const SubmitWorkout = () => {
   const workoutData = useSelector(selectWorkoutData);
@@ -66,7 +67,7 @@ const SubmitWorkout = () => {
   };
 
   return (
-    <SubmitContainer>
+    <RelativeContainer>
       <SubmitButton
         onClick={handleSubmit}
         buttonType={BUTTON_TYPE_CLASSES.inverted}
@@ -74,7 +75,7 @@ const SubmitWorkout = () => {
         Finish workout
       </SubmitButton>
       {error && isSubmitted && <ErrorMessage>{error}</ErrorMessage>}
-    </SubmitContainer>
+    </RelativeContainer>
   );
 };
 

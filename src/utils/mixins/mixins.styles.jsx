@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-
+import styled from "styled-components";
 const componentBoxShadow = css`
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
 `;
@@ -8,6 +8,10 @@ export const hideComponent = css`
   opacity: ${(props) => (props.show ? "1" : "0")};
   display: ${(props) => (props.show ? "block" : "none")};
   pointer-events: ${(props) => (props.show ? "all" : "none")};
+`;
+
+export const RelativeContainer = styled.div`
+  position: relative;
 `;
 
 export const slideInEliptic = css`
