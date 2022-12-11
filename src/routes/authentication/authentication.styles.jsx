@@ -24,8 +24,11 @@ export const AuthContainer = styled.div`
 
 export const ErrorMessage = styled.div`
   color: red;
-  font-size: 1.2rem;
+  font-size: 1rem;
   position: absolute;
   bottom: 0;
-  transform: translateY(110%);
+  transform: translateY(125%);
+  p:first-letter {
+    text-transform: uppercase;
+  }
 `;
