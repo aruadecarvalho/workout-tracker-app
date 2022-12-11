@@ -1,4 +1,5 @@
 export const USER_ACTION_TYPES = {
+  CLEAR_ERROR_MESSAGE: "user/CLEAR_ERROR_MESSAGE",
   // User types
   ADD_USER_TYPE: "user/ADD_USER_TYPE",
   SET_USER_TYPES: "user/SET_USER_TYPES",

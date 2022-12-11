@@ -22,7 +22,7 @@ export const CreateTypeContainer = styled.div`
       height: 3.4rem;
       margin-left: 0.16rem;
     }
-    @media (min-width: 700px) {
+    @media (max-width: 700px) {
       width: 3.6rem;
       height: 2.4rem;
       margin-left: 0.08rem;
@@ -47,12 +47,9 @@ export const AddNewTypeButton = styled(Button)`
   position: absolute;
   width: 15rem;
   transform: scale(0.7);
-  bottom: -225%;
+  bottom: -200%;
   right: -30%;
   @media (max-width: 700px) {
-    bottom: -200%;
-  }
-  @media (max-width: 500px) {
-    bottom: -180%;
+    bottom: -250%;
   }
 `;

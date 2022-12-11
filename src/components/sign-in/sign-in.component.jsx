@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { selectErrorSignIn } from "../../store/user/user.selector";
+
 import Button from "../../components/button/button.component";
 import { BUTTON_TYPE_CLASSES } from "../../components/button/button.component";
 import { ErrorMessage } from "../../routes/authentication/authentication.styles";
-import { selectError } from "../../store/user/user.selector";
 import { RelativeContainer } from "../../utils/mixins/mixins.styles";
 
 const SignIn = ({
@@ -11,10 +12,13 @@ const SignIn = ({
   handleLogin,
   setIsRegistering,
 }) => {
-  const error = useSelector(selectError);
-  const errorMessage = error?.code
-    ? error.code.slice(5, error.code.length).replace(/-/g, " ")
-    : "";
+  const error = useSelector(selectErrorSignIn);
+  const setErrorMessage = () => {
+    if (!error?.code) return "";
+    if (error.code === "auth/user-not-found") return "User not found";
+    if (error.code === "auth/wrong-password") return "Wrong password";
+  };
+  const errorMessage = setErrorMessage(error);
 
   return (
     <RelativeContainer>

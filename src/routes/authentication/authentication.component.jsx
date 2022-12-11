@@ -45,7 +45,6 @@ const Authentication = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-
     try {
       dispatch(signInStart(email, password));
     } catch (error) {
@@ -70,9 +69,11 @@ const Authentication = () => {
       registerInformation.email !== registerInformation.confirmEmail ||
       registerInformation.password !== registerInformation.confirmPassword
     ) {
+      console.log("Email or password do not match");
       setError("Email or password do not match");
       return;
     }
+    setError("");
     dispatch(
       signUpStart(registerInformation.email, registerInformation.password)
     );

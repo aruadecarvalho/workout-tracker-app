@@ -5,6 +5,9 @@ export const addUserType = (type) => {
   return createAction(USER_ACTION_TYPES.ADD_USER_TYPE, type);
 };
 
+export const clearErrorMessage = () =>
+  createAction(USER_ACTION_TYPES.CLEAR_ERROR_MESSAGE);
+
 export const stopLoading = () => createAction(USER_ACTION_TYPES.STOP_LOADING);
 
 // User session

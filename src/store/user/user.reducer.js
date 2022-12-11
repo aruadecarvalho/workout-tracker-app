@@ -6,6 +6,7 @@ const USER_INITIAL_STATE = {
     types: [],
     workouts: [],
   },
+  errorSignIn: null,
   error: null,
   isLoading: false,
 };
@@ -62,9 +63,14 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.FETCH_TYPES_FAILED:
     case USER_ACTION_TYPES.FETCH_WORKOUTS_FAILED:
     case USER_ACTION_TYPES.SIGN_UP_FAILED:
-    case USER_ACTION_TYPES.SIGN_IN_FAILED:
     case USER_ACTION_TYPES.SIGN_OUT_FAILED: {
       return { ...state, error: payload, isLoading: false };
+    }
+    case USER_ACTION_TYPES.SIGN_IN_FAILED: {
+      return { ...state, errorSignIn: payload, isLoading: false };
+    }
+    case USER_ACTION_TYPES.CLEAR_ERROR_MESSAGE: {
+      return { ...state, error: null, errorSignIn: null };
     }
     default:
       return state;

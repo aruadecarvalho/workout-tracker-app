@@ -4,7 +4,7 @@ import { inputStyle } from "../../utils/mixins/mixins.styles";
 export const AuthContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: -10rem auto;
+  margin: -5rem auto;
   height: 100vh;
   width: 100%;
   div {
