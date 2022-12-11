@@ -24,29 +24,25 @@ const WorkoutForm = () => {
   const formFields = useSelector(selectFormFields);
   const workoutData = useSelector(selectWorkoutData);
 
-  const [isEmpty, setIsEmpty] = useState("");
+  const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
+  const validateForm = () => {
     if (!formFields.exerciseName || !formFields.setsNumber) {
-      setIsEmpty("Please add an exercise name and number of sets");
-      return;
+      return "Please add an exercise name and number of sets";
     }
     for (let i = 0; i < formFields.setsNumber; i++) {
       const sets = formFields.sets;
       const keyValue = `set${i}`;
       if (!sets[keyValue]) {
-        setIsEmpty("Please add a weight and reps for each set");
-        return;
+        return "Please add a weight and reps for each set";
       }
       const { weight, reps } = sets[keyValue];
       if (!weight || !reps) {
-        setIsEmpty("Please add a weight and reps for each set");
-        return;
+        return "Please add a weight and reps for each set";
       }
     }
-    setIsEmpty("");
-  }, [formFields]);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -64,7 +60,11 @@ const WorkoutForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitted(true);
-    if (isEmpty) return;
+    const error = validateForm();
+    if (error) {
+      setError(error);
+      return;
+    }
     dispatch(addData(workoutData, formFields));
     dispatch(clearFormFields());
     setIsSubmitted(false);
@@ -118,7 +118,7 @@ const WorkoutForm = () => {
                 />
               </WeightRepsInputDiv>
             ))}
-          {isEmpty && isSubmitted && <ErrorMessage>{isEmpty}</ErrorMessage>}
+          {error && isSubmitted && <ErrorMessage>{error}</ErrorMessage>}
         </WeightRepsContainer>
         <Button type="submit">Save</Button>
       </FormContainer>

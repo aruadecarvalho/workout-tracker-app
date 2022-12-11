@@ -14,6 +14,7 @@ import {
   selectUserIsLoading,
 } from "../../store/user/user.selector";
 import { useEffect } from "react";
+import SignIn from "../../components/sign-in/sign-in.component";
 
 const defaultRegisterInformation = {
   email: "",
@@ -130,28 +131,12 @@ const Authentication = () => {
             </>
           ) : (
             <>
-              <input
-                type="email"
-                placeholder="Email"
-                onChange={handleEmailChange}
+              <SignIn
+                handleEmailChange={handleEmailChange}
+                handlePasswordChange={handlePasswordChange}
+                handleLogin={handleLogin}
+                setIsRegistering={setIsRegistering}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={handlePasswordChange}
-              />
-              <Button
-                buttonType={BUTTON_TYPE_CLASSES.inverted}
-                onClick={handleLogin}
-              >
-                Login
-              </Button>
-              <Button
-                buttonType={BUTTON_TYPE_CLASSES.base}
-                onClick={() => setIsRegistering(true)}
-              >
-                Create account
-              </Button>
             </>
           )}
         </div>

@@ -10,8 +10,23 @@ html {
 
 body {
   font-family: "Montserrat", sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #fafafa;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #272729;
 }
 
 @media (max-width: 768px) {
