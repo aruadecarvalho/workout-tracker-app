@@ -6,7 +6,18 @@ const addWorkoutData = (workoutData, dataToAdd) => {
 };
 
 export const addData = (workoutData, dataToAdd) => {
+  dataToAdd.id = workoutData.length;
   const newData = addWorkoutData(workoutData, dataToAdd);
+  return createAction(WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_DATA, newData);
+};
+
+export const removeData = (workoutData, id) => {
+  if (id === workoutData.length - 1) {
+    return createAction(WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_DATA, [
+      ...workoutData.slice(0, id),
+    ]);
+  }
+  const newData = workoutData.filter((data) => data.id !== id);
   return createAction(WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_DATA, newData);
 };
 

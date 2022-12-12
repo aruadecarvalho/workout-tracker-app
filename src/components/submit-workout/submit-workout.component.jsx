@@ -35,11 +35,8 @@ const SubmitWorkout = () => {
     if (!Object.values(workoutData).length) {
       return "Please add at least one exercise";
     }
-    if (Object.values(nameAndType.type).includes("")) {
-      return "Please select a type";
-    }
-    if (!nameAndType.name.length) {
-      return "Please add a name";
+    if (!Object.values(nameAndType.type).every((value) => value.length)) {
+      return "Please add a name and select a type";
     }
   };
 
@@ -54,7 +51,7 @@ const SubmitWorkout = () => {
       const userUid = currentUser.id;
       const workout = { workoutData, nameAndType, time: new Date() };
       const updatedWorkouts = [...workouts, workout];
-      const userResponse = await setDoc(doc(db, "users", userUid), {
+      await setDoc(doc(db, "users", userUid), {
         workouts: updatedWorkouts,
         types: userTypes,
       });

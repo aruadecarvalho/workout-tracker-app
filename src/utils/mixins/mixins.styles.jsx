@@ -10,6 +10,13 @@ export const hideComponent = css`
   pointer-events: ${(props) => (props.show ? "all" : "none")};
 `;
 
+export const iconStyle = css`
+  font-size: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export const RelativeContainer = styled.div`
   position: relative;
 `;

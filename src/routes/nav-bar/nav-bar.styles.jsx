@@ -1,9 +1,9 @@
 import { FiHome, FiLogOut, FiTag } from "react-icons/fi";
 import { BiDumbbell } from "react-icons/bi";
 
-import { containerWidth } from "../../utils/mixins/mixins.styles";
+import { containerWidth, iconStyle } from "../../utils/mixins/mixins.styles";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const NavBarContiner = styled.div`
   ${containerWidth}
@@ -18,22 +18,15 @@ export const NavBarContiner = styled.div`
   }
 `;
 
-const buttonStyle = css`
-  font-size: 2rem;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 export const SignOutButton = styled(FiLogOut)`
-  ${buttonStyle}
+  ${iconStyle}
 `;
 
 export const HomeButton = styled(FiHome)`
-  ${buttonStyle}
+  ${iconStyle}
 `;
 export const TypesButton = styled(FiTag)`
-  ${buttonStyle}
+  ${iconStyle}
 `;
 
 export const WorkoutsButton = styled(BiDumbbell)`

@@ -9,6 +9,7 @@ export const WORKOUT_DATA_INITIAL_STATE = {
   formFields: {
     exerciseName: "",
     setsNumber: "",
+    id: 0,
     sets: {},
   },
 };

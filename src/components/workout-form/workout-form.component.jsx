@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   FormContainer,
   NameSetNumberContainer,
@@ -65,6 +65,7 @@ const WorkoutForm = () => {
       setError(error);
       return;
     }
+    setError("");
     dispatch(addData(workoutData, formFields));
     dispatch(clearFormFields());
     setIsSubmitted(false);
