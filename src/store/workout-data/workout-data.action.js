@@ -21,6 +21,13 @@ export const removeData = (workoutData, id) => {
   return createAction(WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_DATA, newData);
 };
 
+export const editData = (workoutData, id) => {
+  return createAction(
+    WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS,
+    workoutData[id]
+  );
+};
+
 export const addNameAndType = (dataToAdd) => {
   return createAction(
     WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_NAME_TYPE,

@@ -4,12 +4,12 @@ import {
   slideInEliptic,
   iconStyle,
 } from "../../utils/mixins/mixins.styles";
-import { FiTrash2 } from "react-icons/fi";
-import { icons } from "react-icons";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 export const WorkoutItem = styled.div`
   ${contourStyle}
   ${slideInEliptic}
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   width: 45%;
   font-size: 1.4rem;
   background-color: #1e1e1e;
@@ -21,6 +21,10 @@ export const WorkoutItem = styled.div`
   p {
     color: #fff;
   }
+  div {
+    display: flex;
+    gap: 1rem;
+  }
 `;
 
 export const WorkoutItemTitle = styled.h2`
@@ -31,6 +35,12 @@ export const WorkoutItemTitle = styled.h2`
 
 export const WorkoutItemDelete = styled(FiTrash2)`
   ${iconStyle}
+  font-size: 1.6rem;
+  color: #fff;
+`;
+
+export const WorkoutItemEdit = styled(FiEdit)`
+  ${iconStyle};
   font-size: 1.6rem;
   color: #fff;
 `;
