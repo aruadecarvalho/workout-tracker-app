@@ -11,6 +11,7 @@ export const FormContainer = styled.form`
   z-index: 1;
   input {
     ${inputStyle}
+    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -32,7 +33,7 @@ export const WeightRepsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const WeightRepsInputDiv = styled.div`
+export const WeightRepsInputDiv = styled.div.attrs((props) => props)`
   display: flex;
   margin-top: 1.8rem;
   width: 14rem;
@@ -40,6 +41,14 @@ export const WeightRepsInputDiv = styled.div`
   position: relative;
   input {
     width: 100%;
+  }
+  &::after {
+    content: "${(props) => props.measure}";
+    font-size: 1.2rem;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-100%, -50%);
   }
 `;
 

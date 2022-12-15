@@ -106,10 +106,7 @@ const NameTypeForm = () => {
       <SelectTypeContainer>
         <SelectTypeTitle>What are you up to?</SelectTypeTitle>
         <TypeContainer onClick={handleSetModal}>
-          {types &&
-            types.map((type, key) => {
-              return <TypePreview color={type.color} key={key} />;
-            })}
+          {nameAndType.type && <TypePreview color={nameAndType.type.color} />}
           <TypePreview color="#fff">
             <CreateTypeButton onClick={handleNewType} />
           </TypePreview>

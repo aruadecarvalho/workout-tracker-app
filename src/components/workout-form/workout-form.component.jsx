@@ -100,14 +100,17 @@ const WorkoutForm = () => {
         <WeightRepsContainer>
           {formFields.setsNumber &&
             [...Array(parseInt(formFields.setsNumber))].map((x, key) => (
-              <WeightRepsInputDiv key={key}>
+              <WeightRepsInputDiv
+                key={key}
+                measure={formFields.sets[`set${key}`]?.weight ? "kg" : ""}
+              >
                 <input
                   onChange={handleChange}
                   name="weight"
                   id={`set${key}`}
                   value={formFields.sets[`set${key}`]?.weight || ""}
                   onKeyPress={handleNumberInput}
-                  placeholder={`${key + 1}° Kg`}
+                  placeholder={`${key + 1}° kg`}
                 />
                 <input
                   onChange={handleChange}

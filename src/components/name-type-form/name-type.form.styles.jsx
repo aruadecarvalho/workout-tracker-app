@@ -25,6 +25,7 @@ export const TypeContainer = styled.div`
 
 export const TypePreview = styled.div.attrs((props) => props)`
   ${roundContourStyle}
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   width: 25px;
   height: 25px;
   background-color: ${(props) => props.color};
