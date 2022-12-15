@@ -19,9 +19,11 @@ export const NameSetNumberContainer = styled.div`
   display: flex;
   gap: 5rem;
   input:nth-child(1) {
+    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
     width: 60%;
   }
   input:nth-child(2) {
+    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
     width: 20%;
     transform: translateX(-1rem);
   }
@@ -41,6 +43,7 @@ export const WeightRepsInputDiv = styled.div.attrs((props) => props)`
   position: relative;
   input {
     width: 100%;
+    box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
   }
   &::after {
     content: "${(props) => props.measure}";

@@ -35,6 +35,7 @@ export const TypePreview = styled.div.attrs((props) => props)`
 
 export const WorkoutNameInput = styled.input`
   ${inputStyle}
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
 `;
 
 export const SelectTypeTitle = styled.p`
