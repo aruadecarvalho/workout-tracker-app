@@ -71,12 +71,10 @@ const WorkoutForm = () => {
     setError("");
     if (editing.isEditing) {
       dispatch(setEditedData(workoutData, formFields, editing.id));
-      dispatch(setEditing(false));
-      dispatch(clearFormFields());
-      setIsSubmitted(false);
-      return;
+      dispatch(setEditing(null, false));
+    } else {
+      dispatch(addData(workoutData, formFields));
     }
-    dispatch(addData(workoutData, formFields));
     dispatch(clearFormFields());
     setIsSubmitted(false);
   };

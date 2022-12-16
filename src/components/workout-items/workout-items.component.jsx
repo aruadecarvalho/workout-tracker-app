@@ -22,7 +22,7 @@ const WorkoutItems = () => {
 
   const handleItemEdit = (index) => {
     dispatch(setFormFields(workoutData[index]));
-    dispatch(setEditing(index));
+    dispatch(setEditing(index, true));
   };
   return (
     <>
