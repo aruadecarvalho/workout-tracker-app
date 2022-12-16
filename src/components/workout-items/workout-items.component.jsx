@@ -3,6 +3,7 @@ import { selectWorkoutData } from "../../store/workout-data/workout-data.selecto
 import {
   editData,
   removeData,
+  setFormFields,
 } from "../../store/workout-data/workout-data.action";
 import {
   WorkoutItem,
@@ -19,7 +20,7 @@ const WorkoutItems = () => {
   };
 
   const handleItemEdit = (index) => {
-    dispatch(editData(workoutData, index));
+    dispatch(setFormFields(workoutData[index]));
     dispatch(removeData(workoutData, index));
   };
   return (

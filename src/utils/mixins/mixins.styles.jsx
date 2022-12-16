@@ -2,6 +2,8 @@ import { css } from "styled-components";
 import styled from "styled-components";
 const componentBoxShadow = css`
   box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2) !important;
+  -webkit-appearance: none !important;
 `;
 
 export const hideComponent = css`

@@ -21,11 +21,9 @@ export const removeData = (workoutData, id) => {
   return createAction(WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_DATA, newData);
 };
 
-export const editData = (workoutData, id) => {
-  return createAction(
-    WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS,
-    workoutData[id]
-  );
+// make sure the data edited is inserted in the same index as before
+export const setFormFields = (data) => {
+  return createAction(WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS, data);
 };
 
 export const addNameAndType = (dataToAdd) => {
