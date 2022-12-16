@@ -21,3 +21,10 @@ export const selectFormFields = createSelector(
   [selectFormFieldsReducer],
   (formFields) => formFields
 );
+
+const selectEditingReducer = (state) => state.workoutData.editing;
+
+export const selectEditing = createSelector(
+  [selectEditingReducer],
+  (editing) => editing
+);

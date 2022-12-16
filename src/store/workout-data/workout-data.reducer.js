@@ -12,6 +12,10 @@ export const WORKOUT_DATA_INITIAL_STATE = {
     id: 0,
     sets: {},
   },
+  editing: {
+    isEditing: false,
+    id: null,
+  },
 };
 
 export const workoutDataReducer = (
@@ -24,6 +28,8 @@ export const workoutDataReducer = (
       return { ...state, workoutData: payload };
     case WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_NAME_TYPE:
       return { ...state, nameAndType: payload };
+    case WORKOUT_DATA_ACTION_TYPES.SET_WORKOUT_EDITED:
+      return { ...state, editing: payload };
     case WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS:
       return { ...state, formFields: payload };
     case WORKOUT_DATA_ACTION_TYPES.SET_FORM_FIELDS_NAME_AND_SET:

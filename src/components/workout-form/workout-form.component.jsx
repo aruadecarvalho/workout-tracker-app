@@ -12,9 +12,12 @@ import {
   addFormFieldsSetAndName,
   addFormFieldsWeightAndRep,
   clearFormFields,
+  setEditing,
+  setEditedData,
 } from "../../store/workout-data/workout-data.action";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  selectEditing,
   selectFormFields,
   selectWorkoutData,
 } from "../../store/workout-data/workout-data.selector";
@@ -23,7 +26,7 @@ const WorkoutForm = () => {
   const dispatch = useDispatch();
   const formFields = useSelector(selectFormFields);
   const workoutData = useSelector(selectWorkoutData);
-
+  const editing = useSelector(selectEditing);
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -66,6 +69,13 @@ const WorkoutForm = () => {
       return;
     }
     setError("");
+    if (editing.isEditing) {
+      dispatch(setEditedData(workoutData, formFields, editing.id));
+      dispatch(setEditing(false));
+      dispatch(clearFormFields());
+      setIsSubmitted(false);
+      return;
+    }
     dispatch(addData(workoutData, formFields));
     dispatch(clearFormFields());
     setIsSubmitted(false);
