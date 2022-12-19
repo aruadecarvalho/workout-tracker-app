@@ -19,8 +19,17 @@ export const SelectTypeContainer = styled.div`
 
 export const TypeContainer = styled.div`
   display: flex;
+  align-items: center;
   position: absolute;
   right: 1rem;
+  p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
 `;
 
 export const TypePreview = styled.div.attrs((props) => props)`

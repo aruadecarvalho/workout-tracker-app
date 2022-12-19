@@ -4,7 +4,7 @@ export const WORKOUT_DATA_INITIAL_STATE = {
   workoutData: [],
   nameAndType: {
     name: "",
-    type: { name: "", color: "" },
+    type: { name: "", color: "", id: null },
   },
   formFields: {
     exerciseName: "",

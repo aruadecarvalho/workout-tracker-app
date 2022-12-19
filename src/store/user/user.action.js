@@ -1,7 +1,8 @@
 import { createAction } from "../../utils/reducer/reducer.utils";
 import { USER_ACTION_TYPES } from "./user.types";
 
-export const addUserType = (type) => {
+export const addUserType = (type, types) => {
+  type.id = types.length;
   return createAction(USER_ACTION_TYPES.ADD_USER_TYPE, type);
 };
 

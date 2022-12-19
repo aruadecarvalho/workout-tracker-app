@@ -50,7 +50,7 @@ const NameTypeForm = () => {
 
   useEffect(() => {
     if (submitNewType) {
-      dispatch(addUserType(newType));
+      dispatch(addUserType(newType, types));
       setSubmitNewType(false);
     }
   }, [submitNewType]);
@@ -106,7 +106,12 @@ const NameTypeForm = () => {
       <SelectTypeContainer>
         <SelectTypeTitle>What are you up to?</SelectTypeTitle>
         <TypeContainer onClick={handleSetModal}>
-          {nameAndType.type && <TypePreview color={nameAndType.type.color} />}
+          {nameAndType.type && (
+            <>
+              <p>{nameAndType.type.name}</p>
+              <TypePreview color={nameAndType.type.color} />
+            </>
+          )}
           <TypePreview color="#fff">
             <CreateTypeButton onClick={handleNewType} />
           </TypePreview>

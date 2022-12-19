@@ -35,9 +35,12 @@ const TypeModal = ({
       <TypeModalContainer show={showModal}>
         {types && (
           <TypeModalItemContainer>
-            {types.map((type, key) => {
+            {types.map((type, index) => {
               return (
-                <TypeModalItem key={key} onClick={() => handleSelectType(type)}>
+                <TypeModalItem
+                  key={index}
+                  onClick={() => handleSelectType(type)}
+                >
                   <TypePreview color={type.color} />
                   <p>
                     {type && type.name.length > 8
