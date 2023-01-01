@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectWorkoutData } from "../../store/workout-data/workout-data.selector";
 import {
-  editData,
   removeData,
   setEditing,
   setFormFields,

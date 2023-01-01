@@ -35,9 +35,10 @@ const SubmitWorkout = () => {
     if (!Object.values(workoutData).length) {
       return "Please add at least one exercise";
     }
-    if (!Object.values(nameAndType.type).every((value) => value.length)) {
+    if (Object.values(nameAndType.type).some((type) => type === "")) {
       return "Please add a name and select a type";
     }
+    return "";
   };
 
   const handleSubmit = async () => {

@@ -13,47 +13,28 @@ import {
 import TypeModal from "../type-modal/type-modal.component";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserTypes } from "../../store/user/user.selector";
 import { addNameAndType } from "../../store/workout-data/workout-data.action";
-import { addUserType } from "../../store/user/user.action";
 import { selectWorkoutNameAndType } from "../../store/workout-data/workout-data.selector";
 
 const NameTypeForm = () => {
   const dispatch = useDispatch();
 
   const workoutNameAndType = useSelector(selectWorkoutNameAndType);
-  const types = useSelector(selectUserTypes);
 
+  // detach name and type
+  // NAME is set in name type form
+  // TYPE is set in type modal
+  // Create a reducer for type that handle all of the type actions
+  // USER REDUCER should only store the fechted data from firebase
   const [nameAndType, setNameAndType] = useState(workoutNameAndType);
   const [workoutName, setWorkoutName] = useState(workoutNameAndType.name);
-  const [newType, setNewType] = useState({ name: "", color: "" });
 
   const [showModal, setShowModal] = useState(false);
-  const [submitNewType, setSubmitNewType] = useState(false);
-  const [colorPickerActive, setColorPickerActive] = useState(false);
-  const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
 
   useEffect(() => {
     setNameAndType(workoutNameAndType);
     setWorkoutName(workoutNameAndType.name);
   }, [workoutNameAndType]);
-
-  useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (event.target.name === "color") {
-        setColorPickerActive(true);
-      } else {
-        setColorPickerActive(false);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (submitNewType) {
-      dispatch(addUserType(newType, types));
-      setSubmitNewType(false);
-    }
-  }, [submitNewType]);
 
   useEffect(() => {
     dispatch(addNameAndType(nameAndType));
@@ -74,31 +55,10 @@ const NameTypeForm = () => {
     handleSetModal();
   };
 
-  const handleNewType = (event) => {
-    if (event.target.name) {
-      const { name, value } = event.target;
-      setNewType({ ...newType, [name]: value });
-    }
-    return;
-  };
-
-  const handleCreateNewType = () => {
-    setCreateNewTypeActive(!createNewTypeActive);
-  };
-
-  const handleSubmitNewType = () => setSubmitNewType(true);
-
   const typeModalProps = {
-    types,
     showModal,
     handleSetModal,
     handleSelectType,
-    handleCreateNewType,
-    newType,
-    colorPickerActive,
-    createNewTypeActive,
-    handleNewType,
-    handleSubmitNewType,
   };
 
   return (
@@ -113,7 +73,7 @@ const NameTypeForm = () => {
             </>
           )}
           <TypePreview color="#fff">
-            <CreateTypeButton onClick={handleNewType} />
+            <CreateTypeButton />
           </TypePreview>
         </TypeContainer>
         <>

@@ -1,13 +1,26 @@
+import { useState, useEffect } from "react";
+
 import { CreateTypeContainer, AddNewTypeButton } from "./create-type.styles";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-const createType = ({
-  newType,
-  colorPickerActive,
+const CreateType = ({
   createNewTypeActive,
   handleNewType,
   handleSubmitNewType,
+  newType,
 }) => {
+  const [colorPickerActive, setColorPickerActive] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (event.target.name === "color") {
+        setColorPickerActive(true);
+      } else {
+        setColorPickerActive(false);
+      }
+    });
+  }, []);
+
   return (
     <CreateTypeContainer
       color={newType.color}
@@ -28,4 +41,4 @@ const createType = ({
   );
 };
 
-export default createType;
+export default CreateType;

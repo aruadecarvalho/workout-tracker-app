@@ -1,3 +1,9 @@
+import { useState, useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { addUserType } from "../../store/user/user.action";
+import { selectUserTypes } from "../../store/user/user.selector";
+
 import {
   TypeModalContainer,
   BackdropModal,
@@ -11,28 +17,46 @@ import {
 
 import CreateType from "../create-type/create-type.component";
 
-const TypeModal = ({
-  types,
-  showModal,
-  handleSetModal,
-  handleSelectType,
-  handleNewType,
-  handleCreateNewType,
-  newType,
-  colorPickerActive,
-  createNewTypeActive,
-  handleSubmitNewType,
-}) => {
+const TypeModal = ({ showModal, handleSetModal, handleSelectType }) => {
+  const dispatch = useDispatch();
+  const types = useSelector(selectUserTypes);
+
+  const [newType, setNewType] = useState({ name: "", color: "" });
+  const [createNewTypeActive, setCreateNewTypeActive] = useState(false);
+  const [submitNewType, setSubmitNewType] = useState(false);
+
+  useEffect(() => {
+    if (submitNewType) {
+      dispatch(addUserType(newType, types));
+      setSubmitNewType(false);
+    }
+  }, [submitNewType]);
+
+  const handleCreateNewType = () => {
+    setCreateNewTypeActive(!createNewTypeActive);
+  };
+
+  const handleNewType = (event) => {
+    if (event.target.name) {
+      const { name, value } = event.target;
+      setNewType({ ...newType, [name]: value });
+    }
+    return;
+  };
+
+  const handleSubmitNewType = () => setSubmitNewType(true);
+
   const createTypeProps = {
-    newType,
-    colorPickerActive,
     createNewTypeActive,
     handleNewType,
     handleSubmitNewType,
+    newType,
   };
+
   return (
     <>
       <TypeModalContainer show={showModal}>
+        {/* maybee create a component for this and do the conditional render inside it */}
         {types && (
           <TypeModalItemContainer>
             {types.map((type, index) => {
