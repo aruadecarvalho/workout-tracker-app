@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Workouts from "./routes/workouts/workouts.component";
+import Workout from "./routes/workout/workout.component";
 
 import { selectCurrentUser } from "./store/user/user.selector";
 import { useSelector, useDispatch } from "react-redux";
@@ -47,6 +48,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <Workouts />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="workouts/:workoutID"
+            element={
+              <RequireAuth>
+                <Workout />
               </RequireAuth>
             }
           />
