@@ -68,7 +68,11 @@ const NameTypeForm = () => {
         <TypeContainer onClick={handleSetModal}>
           {nameAndType.type && (
             <>
-              <p>{nameAndType.type.name}</p>
+              <p>
+                {nameAndType.type.name.length > 15
+                  ? nameAndType.type.name.slice(0, 13) + "..."
+                  : nameAndType.type.name}
+              </p>
               <TypePreview color={nameAndType.type.color} />
             </>
           )}

@@ -49,8 +49,9 @@ const SubmitWorkout = () => {
       return;
     }
     try {
+      const date = new Date().toLocaleDateString();
       const userUid = currentUser.id;
-      const workout = { workoutData, nameAndType, time: new Date() };
+      const workout = { workoutData, nameAndType, time: date, id: Date.now() };
       const updatedWorkouts = [...workouts, workout];
       await setDoc(doc(db, "users", userUid), {
         workouts: updatedWorkouts,

@@ -8,11 +8,13 @@ import {
 import { useDispatch } from "react-redux";
 import { useNavigate, Outlet } from "react-router-dom";
 import { signOutStart } from "../../store/user/user.action";
+import { clearWorkoutData } from "../../store/workout-data/workout-data.action";
 const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSignOut = () => {
     dispatch(signOutStart());
+    dispatch(clearWorkoutData());
     navigate("/login");
   };
 

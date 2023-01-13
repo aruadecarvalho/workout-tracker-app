@@ -1,14 +1,16 @@
 import styled from "styled-components";
+import { containerWidth } from "../../utils/mixins/mixins.styles";
 
 export const SpinnerOverlay = styled.div`
   height: 60vh;
-  width: 100%;
+  ${containerWidth};
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  margin: 0 auto;
 `;
 
 export const SpinnerContainer = styled.div`
